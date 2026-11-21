@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C05**
+- Next commit: **C06**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -15,7 +15,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C02 feat(ui): design tokens, fonts, theme toggle
 - [x] C03 feat(ui): core primitives
 - [x] C04 feat(shell): app layout with rail and mobile tab bar
-- [ ] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
+- [x] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
 - [ ] C06 feat(auth): google sign-in and route protection
 - [ ] C07 feat(domain): date utilities with timezone tests
 
@@ -62,6 +62,10 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+- C05 · `Db` is a small typed table repository (list/get/insert/update/remove, equality filters) · single-user scale lets domain code filter in memory; keeps both adapters trivial
+- C05 · `profiles` has `id` pk + unique `user_id` · uniform repository API
+- C05 · added `daily_notes`, `done_at` columns, `hackathon_milestones.gcal_event_id` · needed by C24/C28 and completion summaries
+- C05 · demo store is in-memory on globalThis (resets on server restart) · simplest; no file writes on serverless
 - C01 · app lives at repo root, not a `daybook/` subfolder · planning docs already at root; single package simpler
 - C02 · light `--muted` #6e5e4c and `--accent` #b45309 (vs spec #7a6a58/#d97706) · spec values fail AA contrast on cream
 - C02 · theme via inline pre-paint script + cookie, not server cookies() · keeps routes static, still no flash
@@ -84,6 +88,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C02 · 7e0b0cc · tokens + cookie theme with pre-paint script; smoke ok both themes
 - 2026-11-21 · C03 · af82807 · 11 primitives + /dev/ui gallery; smoke ok
 - 2026-11-21 · C04 · d2125e7 · rail + bottom tabs, 5 stub routes, / redirects to /today; smoke ok 375/1280
+- 2026-11-21 · C05 · 59d7456 · generic typed Db interface; demo + supabase adapters; migration verified on PGlite incl. RLS
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
