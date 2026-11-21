@@ -1,0 +1,566 @@
+[
+  {
+    "title": "Read the full briefing",
+    "url": "https://saadho.arushk.tech/topics/genai-system-design"
+  },
+  {
+    "title": "Self-attention from scratch",
+    "url": "https://saadho.arushk.tech/topics/self-attention"
+  },
+  {
+    "title": "Retrieval for RAG",
+    "url": "https://saadho.arushk.tech/topics/rag-retrieval"
+  },
+  {
+    "title": "Evals and error analysis",
+    "url": "https://saadho.arushk.tech/topics/evals-error-analysis"
+  },
+  {
+    "title": "Decoding",
+    "url": "https://saadho.arushk.tech/topics/decoding-strategies"
+  },
+  {
+    "title": "Tool use and function calling",
+    "url": "https://saadho.arushk.tech/topics/tool-calling"
+  },
+  {
+    "title": "Behavioral interviews",
+    "url": "https://saadho.arushk.tech/topics/behavioral-stories"
+  },
+  {
+    "title": "Python for ML interviews",
+    "url": "https://saadho.arushk.tech/topics/python-for-interviews"
+  },
+  {
+    "title": "Embeddings basics",
+    "url": "https://saadho.arushk.tech/topics/embeddings-basics"
+  },
+  {
+    "title": "Deploying and serving ML models",
+    "url": "https://saadho.arushk.tech/topics/ml-deployment-serving"
+  },
+  {
+    "title": "Kv cache",
+    "url": "https://saadho.arushk.tech/topics/kv-cache"
+  },
+  {
+    "title": "Ai enabled coding",
+    "url": "https://saadho.arushk.tech/topics/ai-enabled-coding"
+  },
+  {
+    "title": "Tokenization bpe",
+    "url": "https://saadho.arushk.tech/topics/tokenization-bpe"
+  },
+  {
+    "title": "Decoder only architecture",
+    "url": "https://saadho.arushk.tech/topics/decoder-only-architecture"
+  },
+  {
+    "title": "Finetuning lora",
+    "url": "https://saadho.arushk.tech/topics/finetuning-lora"
+  },
+  {
+    "title": "Quantization",
+    "url": "https://saadho.arushk.tech/topics/quantization"
+  },
+  {
+    "title": "Embeddings vector search",
+    "url": "https://saadho.arushk.tech/topics/embeddings-vector-search"
+  },
+  {
+    "title": "Llm as judge",
+    "url": "https://saadho.arushk.tech/topics/llm-as-judge"
+  },
+  {
+    "title": "Multihead positional",
+    "url": "https://saadho.arushk.tech/topics/multihead-positional"
+  },
+  {
+    "title": "Pretraining scaling",
+    "url": "https://saadho.arushk.tech/topics/pretraining-scaling"
+  },
+  {
+    "title": "Alignment rlhf dpo",
+    "url": "https://saadho.arushk.tech/topics/alignment-rlhf-dpo"
+  },
+  {
+    "title": "Batching serving",
+    "url": "https://saadho.arushk.tech/topics/batching-serving"
+  },
+  {
+    "title": "Rag evaluation",
+    "url": "https://saadho.arushk.tech/topics/rag-evaluation"
+  },
+  {
+    "title": "Advanced rag",
+    "url": "https://saadho.arushk.tech/topics/advanced-rag"
+  },
+  {
+    "title": "Agent loops",
+    "url": "https://saadho.arushk.tech/topics/agent-loops"
+  },
+  {
+    "title": "Mcp",
+    "url": "https://saadho.arushk.tech/topics/mcp"
+  },
+  {
+    "title": "Eval datasets ci",
+    "url": "https://saadho.arushk.tech/topics/eval-datasets-ci"
+  },
+  {
+    "title": "Classic ml system design",
+    "url": "https://saadho.arushk.tech/topics/classic-ml-system-design"
+  },
+  {
+    "title": "Dsa patterns",
+    "url": "https://saadho.arushk.tech/topics/dsa-patterns"
+  },
+  {
+    "title": "Gradient descent backprop",
+    "url": "https://saadho.arushk.tech/topics/gradient-descent-backprop"
+  },
+  {
+    "title": "Bias variance regularisation",
+    "url": "https://saadho.arushk.tech/topics/bias-variance-regularisation"
+  },
+  {
+    "title": "Classification metrics",
+    "url": "https://saadho.arushk.tech/topics/classification-metrics"
+  },
+  {
+    "title": "Probability stats",
+    "url": "https://saadho.arushk.tech/topics/probability-stats"
+  },
+  {
+    "title": "Neural net from scratch",
+    "url": "https://saadho.arushk.tech/topics/neural-net-from-scratch"
+  },
+  {
+    "title": "Speculative decoding",
+    "url": "https://saadho.arushk.tech/topics/speculative-decoding"
+  },
+  {
+    "title": "Cost latency",
+    "url": "https://saadho.arushk.tech/topics/cost-latency"
+  },
+  {
+    "title": "Agent reliability",
+    "url": "https://saadho.arushk.tech/topics/agent-reliability"
+  },
+  {
+    "title": "Guardrails safety",
+    "url": "https://saadho.arushk.tech/topics/guardrails-safety"
+  },
+  {
+    "title": "Sql pandas",
+    "url": "https://saadho.arushk.tech/topics/sql-pandas"
+  },
+  {
+    "title": "Async python llm",
+    "url": "https://saadho.arushk.tech/topics/async-python-llm"
+  },
+  {
+    "title": "Take home projects",
+    "url": "https://saadho.arushk.tech/topics/take-home-projects"
+  },
+  {
+    "title": "Project deep dive",
+    "url": "https://saadho.arushk.tech/topics/project-deep-dive"
+  },
+  {
+    "title": "Prompt engineering",
+    "url": "https://saadho.arushk.tech/topics/prompt-engineering"
+  },
+  {
+    "title": "Structured outputs",
+    "url": "https://saadho.arushk.tech/topics/structured-outputs"
+  },
+  {
+    "title": "Llm observability",
+    "url": "https://saadho.arushk.tech/topics/llm-observability"
+  },
+  {
+    "title": "Context engineering memory",
+    "url": "https://saadho.arushk.tech/topics/context-engineering-memory"
+  },
+  {
+    "title": "Llm security",
+    "url": "https://saadho.arushk.tech/topics/llm-security"
+  },
+  {
+    "title": "Vector db internals",
+    "url": "https://saadho.arushk.tech/topics/vector-db-internals"
+  },
+  {
+    "title": "Coding agent workflows",
+    "url": "https://saadho.arushk.tech/topics/coding-agent-workflows"
+  },
+  {
+    "title": "Voice realtime agents",
+    "url": "https://saadho.arushk.tech/topics/voice-realtime-agents"
+  },
+  {
+    "title": "Finetuning data curation",
+    "url": "https://saadho.arushk.tech/topics/finetuning-data-curation"
+  },
+  {
+    "title": "Gpu rooflines",
+    "url": "https://saadho.arushk.tech/topics/gpu-rooflines"
+  },
+  {
+    "title": "Rag vs finetuning",
+    "url": "https://saadho.arushk.tech/topics/rag-vs-finetuning"
+  },
+  {
+    "title": "Hallucination mitigation",
+    "url": "https://saadho.arushk.tech/topics/hallucination-mitigation"
+  },
+  {
+    "title": "Llmops rollouts",
+    "url": "https://saadho.arushk.tech/topics/llmops-rollouts"
+  },
+  {
+    "title": "Ai experimentation",
+    "url": "https://saadho.arushk.tech/topics/ai-experimentation"
+  },
+  {
+    "title": "Document ingestion",
+    "url": "https://saadho.arushk.tech/topics/document-ingestion"
+  },
+  {
+    "title": "Efficient attention",
+    "url": "https://saadho.arushk.tech/topics/efficient-attention"
+  },
+  {
+    "title": "Mixture of experts",
+    "url": "https://saadho.arushk.tech/topics/mixture-of-experts"
+  },
+  {
+    "title": "Transformer math",
+    "url": "https://saadho.arushk.tech/topics/transformer-math"
+  },
+  {
+    "title": "Long context",
+    "url": "https://saadho.arushk.tech/topics/long-context"
+  },
+  {
+    "title": "Multimodal vlms",
+    "url": "https://saadho.arushk.tech/topics/multimodal-vlms"
+  },
+  {
+    "title": "Pytorch llm coding",
+    "url": "https://saadho.arushk.tech/topics/pytorch-llm-coding"
+  },
+  {
+    "title": "Multi agent systems",
+    "url": "https://saadho.arushk.tech/topics/multi-agent-systems"
+  },
+  {
+    "title": "Reasoning models",
+    "url": "https://saadho.arushk.tech/topics/reasoning-models"
+  },
+  {
+    "title": "Distillation synthetic data",
+    "url": "https://saadho.arushk.tech/topics/distillation-synthetic-data"
+  },
+  {
+    "title": "Distributed training",
+    "url": "https://saadho.arushk.tech/topics/distributed-training"
+  },
+  {
+    "title": "Design support agent",
+    "url": "https://saadho.arushk.tech/topics/design-support-agent"
+  },
+  {
+    "title": "Design enterprise knowledge assistant",
+    "url": "https://saadho.arushk.tech/topics/design-enterprise-knowledge-assistant"
+  },
+  {
+    "title": "Design chatgpt assistant",
+    "url": "https://saadho.arushk.tech/topics/design-chatgpt-assistant"
+  },
+  {
+    "title": "Design coding copilot",
+    "url": "https://saadho.arushk.tech/topics/design-coding-copilot"
+  },
+  {
+    "title": "Eval design exercise",
+    "url": "https://saadho.arushk.tech/topics/eval-design-exercise"
+  },
+  {
+    "title": "Ai product sense",
+    "url": "https://saadho.arushk.tech/topics/ai-product-sense"
+  },
+  {
+    "title": "Model routing cascades",
+    "url": "https://saadho.arushk.tech/topics/model-routing-cascades"
+  },
+  {
+    "title": "Eval statistics",
+    "url": "https://saadho.arushk.tech/topics/eval-statistics"
+  },
+  {
+    "title": "Design llm inference service",
+    "url": "https://saadho.arushk.tech/topics/design-llm-inference-service"
+  },
+  {
+    "title": "Design agent platform",
+    "url": "https://saadho.arushk.tech/topics/design-agent-platform"
+  },
+  {
+    "title": "Classic ml from scratch",
+    "url": "https://saadho.arushk.tech/topics/classic-ml-from-scratch"
+  },
+  {
+    "title": "Llm search recommendations",
+    "url": "https://saadho.arushk.tech/topics/llm-search-recommendations"
+  },
+  {
+    "title": "Rl verifiable rewards",
+    "url": "https://saadho.arushk.tech/topics/rl-verifiable-rewards"
+  },
+  {
+    "title": "Rerankers embedding finetuning",
+    "url": "https://saadho.arushk.tech/topics/rerankers-embedding-finetuning"
+  },
+  {
+    "title": "Llm rate limits gateway",
+    "url": "https://saadho.arushk.tech/topics/llm-rate-limits-gateway"
+  },
+  {
+    "title": "Pii privacy llm",
+    "url": "https://saadho.arushk.tech/topics/pii-privacy-llm"
+  },
+  {
+    "title": "Text to sql",
+    "url": "https://saadho.arushk.tech/topics/text-to-sql"
+  },
+  {
+    "title": "Computer use agents",
+    "url": "https://saadho.arushk.tech/topics/computer-use-agents"
+  },
+  {
+    "title": "Small models on device",
+    "url": "https://saadho.arushk.tech/topics/small-models-on-device"
+  },
+  {
+    "title": "Diffusion models",
+    "url": "https://saadho.arushk.tech/topics/diffusion-models"
+  },
+  {
+    "title": "Gpu kernels triton",
+    "url": "https://saadho.arushk.tech/topics/gpu-kernels-triton"
+  },
+  {
+    "title": "Company values rounds",
+    "url": "https://saadho.arushk.tech/topics/company-values-rounds"
+  },
+  {
+    "title": "Story bank",
+    "url": "https://saadho.arushk.tech/topics/story-bank"
+  },
+  {
+    "title": "Interview openers",
+    "url": "https://saadho.arushk.tech/topics/interview-openers"
+  },
+  {
+    "title": "Senior behavioral signals",
+    "url": "https://saadho.arushk.tech/topics/senior-behavioral-signals"
+  },
+  {
+    "title": "Linear logistic regression",
+    "url": "https://saadho.arushk.tech/topics/linear-logistic-regression"
+  },
+  {
+    "title": "Tree ensembles",
+    "url": "https://saadho.arushk.tech/topics/tree-ensembles"
+  },
+  {
+    "title": "Feature engineering",
+    "url": "https://saadho.arushk.tech/topics/feature-engineering"
+  },
+  {
+    "title": "Unsupervised learning",
+    "url": "https://saadho.arushk.tech/topics/unsupervised-learning"
+  },
+  {
+    "title": "Deep learning basics",
+    "url": "https://saadho.arushk.tech/topics/deep-learning-basics"
+  },
+  {
+    "title": "Pytorch training loop",
+    "url": "https://saadho.arushk.tech/topics/pytorch-training-loop"
+  },
+  {
+    "title": "Time series forecasting",
+    "url": "https://saadho.arushk.tech/topics/time-series-forecasting"
+  },
+  {
+    "title": "Recommender systems",
+    "url": "https://saadho.arushk.tech/topics/recommender-systems"
+  },
+  {
+    "title": "Ml monitoring drift",
+    "url": "https://saadho.arushk.tech/topics/ml-monitoring-drift"
+  },
+  {
+    "title": "Ml pipelines feature stores",
+    "url": "https://saadho.arushk.tech/topics/ml-pipelines-feature-stores"
+  },
+  {
+    "title": "Gpu accelerator basics",
+    "url": "https://saadho.arushk.tech/topics/gpu-accelerator-basics"
+  },
+  {
+    "title": "Inference metrics slos",
+    "url": "https://saadho.arushk.tech/topics/inference-metrics-slos"
+  },
+  {
+    "title": "Inference benchmarking profiling",
+    "url": "https://saadho.arushk.tech/topics/inference-benchmarking-profiling"
+  },
+  {
+    "title": "Quantization algorithms",
+    "url": "https://saadho.arushk.tech/topics/quantization-algorithms"
+  },
+  {
+    "title": "Pruning sparsity",
+    "url": "https://saadho.arushk.tech/topics/pruning-sparsity"
+  },
+  {
+    "title": "Model compilation runtimes",
+    "url": "https://saadho.arushk.tech/topics/model-compilation-runtimes"
+  },
+  {
+    "title": "Inference engines",
+    "url": "https://saadho.arushk.tech/topics/inference-engines"
+  },
+  {
+    "title": "Dynamic batching model servers",
+    "url": "https://saadho.arushk.tech/topics/dynamic-batching-model-servers"
+  },
+  {
+    "title": "Lora adapter serving",
+    "url": "https://saadho.arushk.tech/topics/lora-adapter-serving"
+  },
+  {
+    "title": "Gpu autoscaling kubernetes",
+    "url": "https://saadho.arushk.tech/topics/gpu-autoscaling-kubernetes"
+  },
+  {
+    "title": "Gpu sharing scheduling",
+    "url": "https://saadho.arushk.tech/topics/gpu-sharing-scheduling"
+  },
+  {
+    "title": "Cold starts model loading",
+    "url": "https://saadho.arushk.tech/topics/cold-starts-model-loading"
+  },
+  {
+    "title": "Inference cost modelling",
+    "url": "https://saadho.arushk.tech/topics/inference-cost-modelling"
+  },
+  {
+    "title": "Prefix semantic caching",
+    "url": "https://saadho.arushk.tech/topics/prefix-semantic-caching"
+  },
+  {
+    "title": "Constrained decoding",
+    "url": "https://saadho.arushk.tech/topics/constrained-decoding"
+  },
+  {
+    "title": "Distributed inference",
+    "url": "https://saadho.arushk.tech/topics/distributed-inference"
+  },
+  {
+    "title": "Inference reliability observability",
+    "url": "https://saadho.arushk.tech/topics/inference-reliability-observability"
+  },
+  {
+    "title": "Edge inference runtimes",
+    "url": "https://saadho.arushk.tech/topics/edge-inference-runtimes"
+  },
+  {
+    "title": "Inference coding round",
+    "url": "https://saadho.arushk.tech/topics/inference-coding-round"
+  },
+  {
+    "title": "Linear algebra matrix calculus",
+    "url": "https://saadho.arushk.tech/topics/linear-algebra-matrix-calculus"
+  },
+  {
+    "title": "Information theory ml",
+    "url": "https://saadho.arushk.tech/topics/information-theory-ml"
+  },
+  {
+    "title": "Optimisers lr schedules",
+    "url": "https://saadho.arushk.tech/topics/optimisers-lr-schedules"
+  },
+  {
+    "title": "Initialisation normalisation",
+    "url": "https://saadho.arushk.tech/topics/initialisation-normalisation"
+  },
+  {
+    "title": "Generalisation deep learning",
+    "url": "https://saadho.arushk.tech/topics/generalisation-deep-learning"
+  },
+  {
+    "title": "Tensor ops einsum",
+    "url": "https://saadho.arushk.tech/topics/tensor-ops-einsum"
+  },
+  {
+    "title": "Debugging training runs",
+    "url": "https://saadho.arushk.tech/topics/debugging-training-runs"
+  },
+  {
+    "title": "Paper to code",
+    "url": "https://saadho.arushk.tech/topics/paper-to-code"
+  },
+  {
+    "title": "Training efficiency mixed precision",
+    "url": "https://saadho.arushk.tech/topics/training-efficiency-mixed-precision"
+  },
+  {
+    "title": "Training data pipelines",
+    "url": "https://saadho.arushk.tech/topics/training-data-pipelines"
+  },
+  {
+    "title": "Experiment design ablations",
+    "url": "https://saadho.arushk.tech/topics/experiment-design-ablations"
+  },
+  {
+    "title": "Research reproducibility",
+    "url": "https://saadho.arushk.tech/topics/research-reproducibility"
+  },
+  {
+    "title": "Paper reading critique",
+    "url": "https://saadho.arushk.tech/topics/paper-reading-critique"
+  },
+  {
+    "title": "Research talk past work",
+    "url": "https://saadho.arushk.tech/topics/research-talk-past-work"
+  },
+  {
+    "title": "Research taste ideation",
+    "url": "https://saadho.arushk.tech/topics/research-taste-ideation"
+  },
+  {
+    "title": "Benchmark design",
+    "url": "https://saadho.arushk.tech/topics/benchmark-design"
+  },
+  {
+    "title": "Interpretability basics",
+    "url": "https://saadho.arushk.tech/topics/interpretability-basics"
+  },
+  {
+    "title": "Rl foundations",
+    "url": "https://saadho.arushk.tech/topics/rl-foundations"
+  },
+  {
+    "title": "Generative models foundations",
+    "url": "https://saadho.arushk.tech/topics/generative-models-foundations"
+  },
+  {
+    "title": "Self supervised objectives",
+    "url": "https://saadho.arushk.tech/topics/self-supervised-objectives"
+  }
+]

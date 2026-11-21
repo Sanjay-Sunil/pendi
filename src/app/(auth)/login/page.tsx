@@ -17,9 +17,7 @@ export default async function LoginPage({
       <div>
         <p className="font-mono text-[11px] tracking-[0.08em] text-muted uppercase">Daybook</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">A calm start to every day.</h1>
-        <p className="mt-2 text-muted">
-          Reading, practice, work, and classes in one quiet place.
-        </p>
+        <p className="mt-2 text-muted">Reading, practice, work, and classes in one quiet place.</p>
       </div>
       {demo ? (
         <div className="flex flex-col gap-2">

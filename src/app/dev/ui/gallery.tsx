@@ -82,7 +82,11 @@ export function Gallery() {
         <Sheet open={open} onClose={() => setOpen(false)} title="Add source">
           <p className="text-muted">Sheet content goes here.</p>
         </Sheet>
-        <EmptyState message="Nothing here yet." actionLabel="Add one" onAction={() => setOpen(true)} />
+        <EmptyState
+          message="Nothing here yet."
+          actionLabel="Add one"
+          onAction={() => setOpen(true)}
+        />
       </section>
     </main>
   );

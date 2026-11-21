@@ -33,7 +33,10 @@ export function SideRail() {
             )}
           >
             {active ? (
-              <span aria-hidden className="absolute top-2 -left-2 h-6 w-0.5 rounded-full bg-accent" />
+              <span
+                aria-hidden
+                className="absolute top-2 -left-2 h-6 w-0.5 rounded-full bg-accent"
+              />
             ) : null}
             <Icon size={20} aria-hidden />
             {label}
