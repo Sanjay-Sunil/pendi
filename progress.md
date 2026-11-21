@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F09**
+- Next commit: **F10**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -22,7 +22,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ### Phase 1 — Reading Planner
 - [x] F08 feat(domain): reading quota planner
-- [ ] F09 feat(reading): sources and items repository
+- [x] F09 feat(reading): sources and items repository
 - [ ] F10 feat(integrations): link extractor for course and blog pages
 - [ ] F11 feat(reading): add-source sheet with page picker
 - [ ] F12 feat(reading): reading screen and per-source progress
@@ -98,6 +98,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F06 · 688c335 · google_sign_in 7 + signInWithIdToken w/ calendar scope; redirect tested; demo banner
 - 2026-11-21 · F07 · 58d71ca · dates.dart on timezone pkg; TS suite ported + weekStart/labels
 - 2026-11-21 · F08 · 27d567d · planner.dart ported test-for-test
+- 2026-11-21 · F09 · 9ce7e2d · models w/ JSON readers; ReadingRepo with validation + Result; tests on DemoDb
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
