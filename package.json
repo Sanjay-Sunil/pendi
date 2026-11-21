@@ -22,10 +22,12 @@
     "next": "15.5.29",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "server-only": "^0.0.1",
     "sonner": "^2.0.8",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.17",
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4",
