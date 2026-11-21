@@ -42,9 +42,22 @@ void main() {
     expect(find.text('Codeforces 800 warmups'), findsOneWidget);
     await tester.tap(find.text('Import'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).at(0), 'Level 1');
     await tester.enterText(
-      find.byType(TextField).at(1),
+      find
+          .descendant(
+            of: find.byType(BottomSheet),
+            matching: find.byType(TextField),
+          )
+          .at(0),
+      'Level 1',
+    );
+    await tester.enterText(
+      find
+          .descendant(
+            of: find.byType(BottomSheet),
+            matching: find.byType(TextField),
+          )
+          .at(1),
       'https://codeforces.com/contest/1950/problem/B\nnot a problem\n4A',
     );
     await tester.pump();

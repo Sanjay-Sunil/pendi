@@ -1,6 +1,8 @@
 import '../../core/result.dart';
 import '../../domain/cp.dart';
 import '../../domain/cp_import.dart';
+import '../../domain/dates.dart';
+import '../../domain/streak.dart';
 import '../db.dart';
 import '../models/cp.dart';
 import '../models/json.dart';
@@ -102,4 +104,33 @@ class CpRepo {
         }
         return n;
       });
+
+  /// Today's problems from the active list; picked once per day and persisted.
+  Future<List<CpProblem>> daily(LocalDay day, {int count = 2}) async {
+    final list = await activeList();
+    if (list == null) return [];
+    final all = await problems(listId: list.id);
+    final existing = (await _db.list('cp_daily', where: {'day': day}))
+        .map((r) => r.str('problem_id'))
+        .where((id) => all.any((p) => p.id == id))
+        .toList();
+    final ids = pickDaily(all, existing, count: count);
+    if (existing.isEmpty && ids.isNotEmpty) {
+      await _db.insert('cp_daily', [
+        for (final id in ids) {'day': day, 'problem_id': id},
+      ]);
+    }
+    return [for (final id in ids) all.firstWhere((p) => p.id == id)];
+  }
+
+  /// Days in a row with at least [threshold] solves, ending today or yesterday.
+  Future<int> streakAsOf(LocalDay today, {int threshold = 1}) async {
+    final solved = (await problems())
+        .map((p) => p.solvedAt)
+        .whereType<DateTime>();
+    return streak(countByDay(solved), today, threshold: threshold);
+  }
+
+  Future<List<CpProblem>> reviewQueue() async =>
+      (await problems()).where((p) => p.status == CpStatus.review).toList();
 }

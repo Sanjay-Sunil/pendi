@@ -8,6 +8,7 @@ import 'package:pendi/features/auth/auth_repo.dart';
 import 'package:pendi/features/auth/providers.dart';
 import 'package:pendi/theme/theme_mode_provider.dart';
 
+import 'fakes.dart';
 import 'pump.dart';
 
 /// Pumps the whole app at a route, size and theme.
@@ -17,7 +18,7 @@ Future<void> pumpApp(
   double width = 375,
   double height = 800,
   String theme = 'dark',
-  List<Override> overrides = const [],
+  List<Override>? overrides,
   AuthRepo? auth,
 }) async {
   tester.view.physicalSize = Size(width, height);
@@ -37,7 +38,7 @@ Future<void> pumpApp(
             initialLocation: location,
           ),
         ),
-        ...overrides,
+        ...(overrides ?? testOverrides()),
       ],
       child: const PendiApp(),
     ),

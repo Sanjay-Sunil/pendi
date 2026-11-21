@@ -4,6 +4,7 @@ import '../../data/models/cp.dart';
 import '../../data/providers.dart';
 import '../../data/repos/cp_repo.dart';
 import '../../data/repos/profile_repo.dart';
+import '../../domain/dates.dart';
 import '../../integrations/codeforces.dart';
 
 final cpRepoProvider = FutureProvider<CpRepo>(
@@ -62,9 +63,44 @@ class CpSync extends Notifier<bool> {
       return e.message;
     } finally {
       ref.invalidate(cpListsProvider);
+      ref.invalidate(cpTodayProvider);
       state = false;
     }
   }
 }
 
 final cpSyncProvider = NotifierProvider<CpSync, bool>(CpSync.new);
+
+class CpToday {
+  const CpToday({
+    required this.problems,
+    required this.streak,
+    required this.review,
+    required this.handle,
+    required this.hasList,
+  });
+  final List<CpProblem> problems;
+  final int streak;
+  final List<CpProblem> review;
+  final String? handle;
+  final bool hasList;
+}
+
+final cpTodayProvider = FutureProvider<CpToday>((ref) async {
+  final repo = await ref.watch(cpRepoProvider.future);
+  final today = todayLocal(ref.watch(clockProvider)());
+  final profile = await (await ref.watch(profileRepoProvider.future)).get();
+  final (daily, streak, review, active) = await (
+    repo.daily(today),
+    repo.streakAsOf(today),
+    repo.reviewQueue(),
+    repo.activeList(),
+  ).wait;
+  return CpToday(
+    problems: daily,
+    streak: streak,
+    review: review,
+    handle: profile.cfHandle,
+    hasList: active != null,
+  );
+});
