@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F33**
+- Next commit: **DONE**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -56,7 +56,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F30 feat(settings): profile, timezone, codeforces handle, data export
 - [x] F31 test(e2e): smoke flows
 - [x] F32 chore: a11y, performance, and empty-state pass
-- [ ] F33 docs: README, setup guide, and handover
+- [x] F33 docs: README, setup guide, and handover
 
 ## Decisions
 <!-- Agent: log every judgment call here. Format: Fxx · decision · why -->
@@ -131,6 +131,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F30 · acc6fe7 · settings from Today header: theme, timezone (runtime activeTimezone), CF handle, sign out; JSON export validated against every table model before sharing
 - 2026-11-21 · F31 · b7db94a · integration_test in demo mode: add source + complete page, CP solved, r: capture shows on Today; tool/e2e.sh (chromedriver, headless) passes
 - 2026-11-21 · F32 · 0d39936 · guideline tests on every main screen x2 themes; wide-layout overflow check; research tasks empty state; deferred Settings/gallery; perf numbers recorded
+- 2026-11-21 · F33 · 4026c07 · README (≤10-line run), docs/SETUP.md (Supabase, Google OAuth incl. SHA-1, release APK, env table), handover in progress.md
 
 ## Handover (written in F33)
 
