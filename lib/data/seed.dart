@@ -5,6 +5,7 @@ import '../domain/dates.dart';
 import 'db.dart';
 import 'models/reading.dart';
 import 'repos/cp_repo.dart';
+import 'repos/habit_repo.dart';
 import 'repos/reading_repo.dart';
 import 'repos/research_repo.dart';
 
@@ -55,4 +56,9 @@ Future<void> seedDemo(
   );
 
   await ResearchRepo(db, now: () => now).project();
+
+  final habits = HabitRepo(db);
+  for (final name in ['Workout', 'Sleep before midnight']) {
+    await habits.add(name);
+  }
 }

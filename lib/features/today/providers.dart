@@ -8,6 +8,7 @@ import '../../domain/dates.dart';
 import '../calendar/providers.dart';
 import '../college/providers.dart';
 import '../cp/providers.dart';
+import '../habits/providers.dart';
 import '../hackathons/providers.dart';
 import '../reading/providers.dart';
 import '../research/providers.dart';
@@ -133,5 +134,6 @@ void invalidateToday(WidgetRef ref) {
     ..invalidate(researchTasksProvider)
     ..invalidate(collegeTasksProvider)
     ..invalidate(inboxProvider)
+    ..invalidate(habitsProvider)
     ..invalidate(todayProvider);
 }

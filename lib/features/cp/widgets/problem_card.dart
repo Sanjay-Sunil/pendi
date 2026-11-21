@@ -29,7 +29,9 @@ class _ProblemCardState extends ConsumerState<ProblemCard> {
   @override
   void didUpdateWidget(ProblemCard old) {
     super.didUpdateWidget(old);
-    _status = widget.problem.status;
+    if (!identical(old.problem, widget.problem)) {
+      _status = widget.problem.status;
+    }
   }
 
   @override

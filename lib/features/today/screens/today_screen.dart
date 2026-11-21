@@ -13,6 +13,7 @@ import '../../../ui/section_label.dart';
 import '../../../ui/streak_flame.dart';
 import '../../college/providers.dart';
 import '../../cp/providers.dart';
+import '../../habits/habits_section.dart';
 import '../../hackathons/providers.dart';
 import '../../reading/widgets/reading_item_row.dart';
 import '../../research/providers.dart';
@@ -144,6 +145,8 @@ class TodayScreen extends ConsumerWidget {
                 return res.errorOrNull;
               },
             ),
+          gap(),
+          const HabitsSection(),
           gap(),
           InkWell(
             onTap: () => context.push('/inbox'),

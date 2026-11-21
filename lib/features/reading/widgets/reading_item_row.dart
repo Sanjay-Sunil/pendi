@@ -32,7 +32,7 @@ class _ReadingItemRowState extends ConsumerState<ReadingItemRow> {
   @override
   void didUpdateWidget(ReadingItemRow old) {
     super.didUpdateWidget(old);
-    _done = widget.item.isDone;
+    if (!identical(old.item, widget.item)) _done = widget.item.isDone;
   }
 
   @override
