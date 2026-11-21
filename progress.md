@@ -4,9 +4,10 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C12**
+- Next commit: **C13**
 - Gate status: green
 - Mode: demo (no env keys set)
+- Session 1 stopped after C12 (context budget). UI checks: `pnpm build && scripts/serve-smoke.sh /route ...`
 
 ## Checklist
 
@@ -24,7 +25,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C09 feat(reading): sources and items data layer with actions
 - [x] C10 feat(integrations): link extractor for course and blog pages
 - [x] C11 feat(reading): add-source flow with page picker
-- [ ] C12 feat(reading): reading screen and per-source progress
+- [x] C12 feat(reading): reading screen and per-source progress
 
 ### Phase 2 — CP Tracker
 - [ ] C13 feat(domain): cp daily picker and streak
@@ -103,6 +104,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C09 · fc9c886 · lib/db/reading + zod-validated server actions; ActionResult helper
 - 2026-11-21 · C10 · b0d366c · extractPages w/ fixtures; live: saadho ok, designed-to-scale is a hash-routed SPA (empty)
 - 2026-11-21 · C11 · 36470f1 · add sheet: extract → pick/reorder → create; seeds 40 + 141 pages at 30 days; e2e checked
+- 2026-11-21 · C12 · 73d3f07 · source cards: progress, days left, optimistic ticks, 2-line notes, carried-over badge; multi-day test
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
