@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C06**
+- Next commit: **C07**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -16,7 +16,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C03 feat(ui): core primitives
 - [x] C04 feat(shell): app layout with rail and mobile tab bar
 - [x] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
-- [ ] C06 feat(auth): google sign-in and route protection
+- [x] C06 feat(auth): google sign-in and route protection
 - [ ] C07 feat(domain): date utilities with timezone tests
 
 ### Phase 1 — Reading Planner
@@ -62,6 +62,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+- C06 · Google provider refresh token is not persisted yet · token storage table lands with gcal in C24 (additive migration)
 - C05 · `Db` is a small typed table repository (list/get/insert/update/remove, equality filters) · single-user scale lets domain code filter in memory; keeps both adapters trivial
 - C05 · `profiles` has `id` pk + unique `user_id` · uniform repository API
 - C05 · added `daily_notes`, `done_at` columns, `hackathon_milestones.gcal_event_id` · needed by C24/C28 and completion summaries
@@ -89,6 +90,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C03 · af82807 · 11 primitives + /dev/ui gallery; smoke ok
 - 2026-11-21 · C04 · d2125e7 · rail + bottom tabs, 5 stub routes, / redirects to /today; smoke ok 375/1280
 - 2026-11-21 · C05 · 59d7456 · generic typed Db interface; demo + supabase adapters; migration verified on PGlite incl. RLS
+- 2026-11-21 · C06 · 8e266ef · Google OAuth w/ calendar scope + offline; middleware redirect tested; demo banner
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
