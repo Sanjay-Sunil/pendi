@@ -28,7 +28,10 @@ describe("DemoDb", () => {
       { source_id: src.id, title: "a", url: "https://s.dev/a", position: 1 },
       { source_id: "other", title: "z", url: "https://z.dev/", position: 0 },
     ]);
-    const items = await db.list("reading_items", { where: { source_id: src.id }, orderBy: "position" });
+    const items = await db.list("reading_items", {
+      where: { source_id: src.id },
+      orderBy: "position",
+    });
     expect(items.map((i) => i.title)).toEqual(["a", "b"]);
     const desc = await db.list("reading_items", { orderBy: "position", ascending: false });
     expect(desc[0].title).toBe("b");

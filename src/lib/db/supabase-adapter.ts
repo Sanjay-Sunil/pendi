@@ -3,7 +3,8 @@ import { tableSchemas, type Row, type TableName } from "./schema";
 import { DbError, type Db, type Insert, type ListOptions, type Patch } from "./types";
 
 function fail(table: string, error: { message: string; code?: string }): never {
-  const code = error.code === "23505" ? "conflict" : error.code === "PGRST116" ? "not_found" : "backend";
+  const code =
+    error.code === "23505" ? "conflict" : error.code === "PGRST116" ? "not_found" : "backend";
   throw new DbError(`${table}: ${error.message}`, code);
 }
 
@@ -37,7 +38,10 @@ export class SupabaseDb implements Db {
 
   async insert<T extends TableName>(table: T, values: Insert<T>[]): Promise<Row<T>[]> {
     if (values.length === 0) return [];
-    const { data, error } = await this.client.from(table).insert(values as Record<string, unknown>[]).select("*");
+    const { data, error } = await this.client
+      .from(table)
+      .insert(values as Record<string, unknown>[])
+      .select("*");
     if (error) fail(table, error);
     return this.parse(table, data ?? []);
   }
