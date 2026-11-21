@@ -1,0 +1,92 @@
+import '../../core/result.dart';
+import '../../domain/cp.dart';
+import '../../domain/cp_import.dart';
+import '../db.dart';
+import '../models/cp.dart';
+import '../models/json.dart';
+
+class CpRepo {
+  CpRepo(this._db, {DateTime Function()? now}) : _now = now ?? DateTime.now;
+
+  final Db _db;
+  final DateTime Function() _now;
+
+  Future<List<CpList>> lists() async => (await _db.list(
+    'cp_lists',
+    orderBy: 'created_at',
+  )).map(CpList.fromJson).toList();
+
+  Future<CpList?> activeList() async {
+    final all = await lists();
+    return all.where((l) => l.active).firstOrNull;
+  }
+
+  Future<List<CpProblem>> problems({String? listId}) async => (await _db.list(
+    'cp_problems',
+    where: listId == null ? const {} : {'list_id': listId},
+    orderBy: 'position',
+  )).map(CpProblem.fromJson).toList();
+
+  /// Creates a list from parsed problems. The first list becomes active.
+  Future<Result<CpList>> createList(
+    String name,
+    List<ParsedProblem> parsed, {
+    String? source,
+  }) => Result.guard(() async {
+    final title = requireText(name, 'Name', max: 120);
+    if (parsed.isEmpty) {
+      throw const ValidationError('No valid problems to import');
+    }
+    final first = (await lists()).isEmpty;
+    final list = CpList.fromJson(
+      (await _db.insert('cp_lists', [
+        {'name': title, 'source': source, 'active': first},
+      ])).single,
+    );
+    await _db.insert('cp_problems', [
+      for (var i = 0; i < parsed.length; i++)
+        {
+          'list_id': list.id,
+          'contest_id': parsed[i].contestId,
+          'idx': parsed[i].index,
+          'name': parsed[i].name,
+          'rating': parsed[i].rating,
+          'position': i,
+        },
+    ]);
+    return list;
+  });
+
+  Future<Result<void>> rename(String id, String name) => Result.guard(
+    () => _db.update('cp_lists', id, {
+      'name': requireText(name, 'Name', max: 120),
+    }),
+  );
+
+  /// Makes [id] the only active list.
+  Future<Result<void>> activate(String id) => Result.guard(() async {
+    for (final l in await lists()) {
+      if (l.active != (l.id == id)) {
+        await _db.update('cp_lists', l.id, {'active': l.id == id});
+      }
+    }
+  });
+
+  Future<Result<CpProblem>> setStatus(String id, CpStatus status) =>
+      Result.guard(
+        () async => CpProblem.fromJson(
+          await _db.update('cp_problems', id, {
+            'status': status.name,
+            'solved_at': status == CpStatus.solved ? isoOrNull(_now()) : null,
+          }),
+        ),
+      );
+
+  Future<Result<CpProblem>> setNote(String id, String note) => Result.guard(
+    () async => CpProblem.fromJson(
+      await _db.update('cp_problems', id, {
+        'note': note.trim().isEmpty ? null : note.trim(),
+      }),
+    ),
+  );
+}

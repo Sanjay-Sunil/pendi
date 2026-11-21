@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import '../domain/cp_import.dart';
 import '../domain/dates.dart';
 import 'db.dart';
 import 'models/reading.dart';
+import 'repos/cp_repo.dart';
 import 'repos/reading_repo.dart';
 
 /// Loads bundled JSON assets; overridable in tests.
@@ -43,5 +45,11 @@ Future<void> seedDemo(
     startDate: today,
     targetDays: 30,
     pages: await _pages(loadAsset, 'saadho.json'),
+  );
+
+  await CpRepo(db, now: () => now).createList(
+    'Codeforces 800 warmups',
+    parseProblemList(await loadAsset('assets/seed/cp-sample.json')).problems,
+    source: 'bundled sample',
   );
 }

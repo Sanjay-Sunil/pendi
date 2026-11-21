@@ -1,0 +1,22 @@
+[
+  {"contestId": 4, "index": "A", "name": "Watermelon", "rating": 800},
+  {"contestId": 71, "index": "A", "name": "Way Too Long Words", "rating": 800},
+  {"contestId": 231, "index": "A", "name": "Team", "rating": 800},
+  {"contestId": 158, "index": "A", "name": "Next Round", "rating": 800},
+  {"contestId": 50, "index": "A", "name": "Domino piling", "rating": 800},
+  {"contestId": 282, "index": "A", "name": "Bit++", "rating": 800},
+  {"contestId": 263, "index": "A", "name": "Beautiful Matrix", "rating": 800},
+  {"contestId": 112, "index": "A", "name": "Petya and Strings", "rating": 800},
+  {"contestId": 339, "index": "A", "name": "Helpful Maths", "rating": 800},
+  {"contestId": 281, "index": "A", "name": "Word Capitalization", "rating": 800},
+  {"contestId": 266, "index": "A", "name": "Stones on the Table", "rating": 800},
+  {"contestId": 236, "index": "A", "name": "Boy or Girl", "rating": 800},
+  {"contestId": 467, "index": "A", "name": "George and Accommodation", "rating": 800},
+  {"contestId": 546, "index": "A", "name": "Soldier and Bananas", "rating": 800},
+  {"contestId": 791, "index": "A", "name": "Bear and Big Brother", "rating": 800},
+  {"contestId": 977, "index": "A", "name": "Wrong Subtraction", "rating": 800},
+  {"contestId": 59, "index": "A", "name": "Word", "rating": 800},
+  {"contestId": 734, "index": "A", "name": "Anton and Danik", "rating": 800},
+  {"contestId": 344, "index": "A", "name": "Magnets", "rating": 800},
+  {"contestId": 1, "index": "A", "name": "Theatre Square", "rating": 1000}
+]
