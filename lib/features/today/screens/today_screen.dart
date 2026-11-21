@@ -7,6 +7,8 @@ import '../../../data/providers.dart';
 import '../../../domain/cp.dart';
 import '../../../domain/dates.dart';
 import '../../../theme/tokens.dart';
+import '../../../ui/app_button.dart';
+import '../../../ui/app_sheet.dart';
 import '../../../ui/empty_state.dart';
 import '../../../ui/page_scaffold.dart';
 import '../../../ui/section_label.dart';
@@ -15,6 +17,8 @@ import '../../college/providers.dart';
 import '../../cp/providers.dart';
 import '../../habits/habits_section.dart';
 import '../../hackathons/providers.dart';
+import '../../notes/evening_review.dart';
+import '../../notes/providers.dart';
 import '../../reading/widgets/reading_item_row.dart';
 import '../../research/providers.dart';
 import '../providers.dart';
@@ -42,6 +46,18 @@ class TodayScreen extends ConsumerWidget {
       title: greeting(now),
       label: formatDayLabel(todayLocal(now)),
       maxWidth: Tokens.maxToday,
+      actions: [
+        AppButton(
+          label: 'Review',
+          small: true,
+          variant: ButtonVariant.ghost,
+          onPressed: () => showAppSheet<void>(
+            context,
+            title: 'Evening review',
+            child: const EveningReview(),
+          ),
+        ),
+      ],
       onRefresh: () async {
         invalidateToday(ref);
         await ref.read(todayProvider.future);
@@ -51,6 +67,15 @@ class TodayScreen extends ConsumerWidget {
         if (today.hasError && d == null)
           Text('Could not load today: ${today.error}'),
         if (d != null) ...[
+          if ((ref.watch(todayTop3Provider).value ?? const []).isNotEmpty) ...[
+            const SectionLabel('Top 3'),
+            for (final (i, t) in ref.watch(todayTop3Provider).value!.indexed)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Text('${i + 1}. $t'),
+              ),
+            gap(),
+          ],
           const SectionLabel('Calendar'),
           const SizedBox(height: 8),
           CalendarStrip(events: d.events),
