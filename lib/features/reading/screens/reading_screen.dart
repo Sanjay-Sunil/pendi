@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../../../theme/app_theme.dart';
-import '../../../theme/tokens.dart';
 import '../../../ui/app_button.dart';
-import '../../../ui/app_card.dart';
 import '../../../ui/app_sheet.dart';
 import '../../../ui/empty_state.dart';
 import '../../../ui/page_scaffold.dart';
 import '../providers.dart';
 import '../widgets/add_source_sheet.dart';
+import '../widgets/source_card.dart';
 
 class ReadingScreen extends ConsumerWidget {
   const ReadingScreen({super.key});
@@ -55,25 +53,8 @@ class ReadingScreen extends ConsumerWidget {
                 ]
               : [
                   for (final o in list) ...[
-                    AppCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            o.source.title,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            '${o.plan.quota} ${o.plan.quota == 1 ? 'page' : 'pages'} today',
-                            style: TextStyle(
-                              fontFamily: mono,
-                              color: context.colors.muted,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
+                    SourceCard(overview: o),
+                    const SizedBox(height: 16),
                   ],
                 ],
         ),

@@ -10,8 +10,8 @@ void main() {
     await pumpApp(tester, location: '/reading', overrides: testOverrides());
     expect(find.text('Designed to Scale'), findsOneWidget);
     expect(find.text('Saadho'), findsOneWidget);
-    expect(find.text('2 pages today'), findsOneWidget); // 40 over 30 days
-    expect(find.text('5 pages today'), findsOneWidget); // 141 over 30 days
+    expect(find.text('TODAY · 2 PAGES'), findsOneWidget); // 40 over 30 days
+    expect(find.text('TODAY · 5 PAGES'), findsOneWidget); // 141 over 30 days
   });
 
   testWidgets('adds a link with only the picked pages', (tester) async {
@@ -43,7 +43,7 @@ void main() {
     await tester.tap(find.text('Add 3 pages'));
     await tester.pumpAndSettle();
     expect(find.text('My blog'), findsOneWidget);
-    expect(find.text('1 page today'), findsOneWidget); // 3 over 4 days
+    expect(find.text('TODAY · 1 PAGE'), findsOneWidget); // 3 over 4 days
     expect(find.text('Added 3 pages'), findsOneWidget);
   });
 
