@@ -1,145 +1,190 @@
 # build.md — Stack, Setup, Schema, Design Tokens
 
 ## Product in one paragraph
-Daybook is a mobile-first PWA with one **Today** screen that merges four engines: Reading Planner, CP Tracker, Work Hub (hackathons + research internship), and College (Google Calendar, classes, club tasks). Single user, private, fast.
+Pendi is a mobile-first Flutter app with one **Today** screen that merges four engines: Reading Planner, CP Tracker, Work Hub (hackathons + research internship), and College (Google Calendar, classes, club tasks). Single user, private, fast. Android is the primary target; the same code must also build for web so it can be checked in a browser.
 
 ## Stack
-- Next.js 15 (App Router) + TypeScript strict + Tailwind CSS v4
-- Supabase: Postgres, Auth (Google OAuth, also used for Calendar scope), Row Level Security
-- Zod, date-fns + date-fns-tz, lucide-react, sonner (toasts), cmdk (quick capture palette)
-- Vitest (unit), Playwright (smoke), pnpm
-- Deploy: Vercel. PWA via `manifest.webmanifest` + a minimal service worker (cache shell only).
-- No component library. Build small primitives in `src/components/ui` (Button, Card, Input, Checkbox, Badge, Sheet, Tabs, ProgressBar, EmptyState).
+- Flutter (stable, 3.47+) / Dart 3, null-safe, `very_good_analysis`-style strict lints
+- State: `flutter_riverpod` (no code generation). Routing: `go_router` with a `StatefulShellRoute` for the tab bar.
+- Backend: Supabase via `supabase_flutter` (Postgres, Auth, Row Level Security)
+- Auth: Google Sign-In via `google_sign_in`, exchanged for a Supabase session with `signInWithIdToken`; Calendar scope requested on the same sign-in
+- Google Calendar: `googleapis` (calendar/v3) + `extension_google_sign_in_as_googleapis_auth`
+- HTTP + parsing: `http`, `html` (link extractor), `xml` (sitemaps)
+- Dates: `timezone` package (IANA data) + `intl`
+- Fonts: `google_fonts` with Geist and Geist Mono **bundled as assets** (no runtime fetching)
+- Icons: `lucide_icons_flutter` (fallback: Material Symbols Rounded)
+- Toasts: `ScaffoldMessenger` snackbars styled to the theme. Quick capture: a custom bottom sheet (no package).
+- Sharing/export: `share_plus`, `path_provider`
+- Tests: `flutter_test` (unit + widget), `integration_test` for 3 smoke flows, `mocktail` for fakes
+- No code generation (`build_runner`, freezed, json_serializable). Models are hand-written immutable classes with `fromJson`/`toJson`/`copyWith`.
+- No component library. Build small widgets in `lib/ui/` (AppButton, AppCard, AppInput, AppCheckbox, AppBadge, AppSheet, AppTabs, AppProgressBar, EmptyState, SectionLabel).
 
 ## Bootstrap commands
 ```
-pnpm create next-app@latest daybook --ts --tailwind --app --src-dir --eslint --import-alias "@/*" --use-pnpm
-cd daybook
-pnpm add @supabase/supabase-js @supabase/ssr zod date-fns date-fns-tz lucide-react sonner cmdk
-pnpm add -D vitest @vitest/coverage-v8 @playwright/test prettier
+flutter create --org dev.pendi --project-name pendi --platforms android,web .
+flutter pub add flutter_riverpod go_router supabase_flutter google_sign_in googleapis \
+  extension_google_sign_in_as_googleapis_auth http html xml timezone intl google_fonts \
+  lucide_icons_flutter share_plus path_provider
+flutter pub add --dev mocktail very_good_analysis integration_test --sdk=flutter
 ```
-Scripts in `package.json`: `dev`, `build`, `lint`, `typecheck` (`tsc --noEmit`), `test` (`vitest run`), `e2e` (`playwright test`).
+(`integration_test` comes from the SDK: add it under `dev_dependencies` with `sdk: flutter`.)
 
-## Environment (`.env.example`)
+## Configuration
+No secrets in the repo. Values are passed at build time with `--dart-define-from-file=env.json` (git-ignored); `env.example.json` is committed:
+```json
+{
+  "SUPABASE_URL": "",
+  "SUPABASE_ANON_KEY": "",
+  "GOOGLE_WEB_CLIENT_ID": "",
+  "APP_TIMEZONE": "Asia/Kolkata"
+}
 ```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=        # server only, used by cron/sync routes
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-APP_TIMEZONE=Asia/Kolkata
-CRON_SECRET=                      # protects /api/cron/*
-```
-If keys are missing, run in **demo mode**: `src/lib/db` falls back to an in-memory/local JSON store behind the same interface so the whole UI is buildable and testable with no backend.
+Read through `lib/core/env.dart` (`String.fromEnvironment`). If `SUPABASE_URL` or `SUPABASE_ANON_KEY` is empty the app runs in **demo mode**: repositories use an in-memory store seeded from `assets/seed/`, auth is skipped, and a "Demo mode" strip is shown. The whole UI must be usable and testable this way.
 
 ## Folder structure
 ```
-src/
-  app/
-    (auth)/login/
-    (app)/layout.tsx            # shell: rail + bottom tabs
-    (app)/today/ reading/ cp/ work/ college/ notes/ settings/
-    api/cron/ api/gcal/
-  components/ui/   components/shell/
-  lib/
-    db/            # all data access (supabase + demo adapter)
-    domain/        # pure logic + tests: planner.ts streak.ts dates.ts cp.ts
-    integrations/  # codeforces.ts gcal.ts sitemap.ts
-    supabase/      # server/client helpers
-  modules/
-    reading/ cp/ hackathons/ research/ college/ today/ capture/
-supabase/migrations/
-tests/ e2e/
+lib/
+  main.dart                  # bootstrap: env, timezone db, Supabase (if configured), ProviderScope
+  app.dart                   # MaterialApp.router, themes
+  core/                      # env.dart, router.dart, result.dart, errors
+  theme/                     # tokens.dart, app_theme.dart, theme_mode_provider.dart
+  ui/                        # shared widgets (primitives)
+  shell/                     # tab scaffold: bottom bar (mobile) / navigation rail (wide)
+  data/
+    db.dart                  # Db interface (table repository)
+    demo_db.dart             # in-memory adapter + seed
+    supabase_db.dart         # Supabase adapter
+    models/                  # one file per table model
+    repos/                   # reading_repo.dart, cp_repo.dart, ... (all data access)
+  domain/                    # pure Dart + tests: dates.dart planner.dart cp.dart streak.dart attendance.dart weekly_summary.dart
+  integrations/              # sitemap.dart codeforces.dart gcal.dart
+  features/
+    reading/ cp/ hackathons/ research/ college/ today/ capture/ habits/ notes/ settings/ auth/
+      (each: screens/, widgets/, providers.dart)
+assets/seed/                 # designed-to-scale.json, saadho.json, cp-sample.json
+assets/fonts/                # Geist, Geist Mono
+supabase/migrations/         # 0001_init.sql (already written and tested), later additive migrations
+test/                        # mirrors lib/
+integration_test/            # smoke flows
 ```
 
 ## Database schema (migration `0001_init.sql`)
-All tables have `id uuid pk default gen_random_uuid()`, `user_id uuid not null references auth.users`, `created_at timestamptz default now()`. Enable RLS on every table with policy `user_id = auth.uid()` for all operations.
+Already written in `supabase/migrations/0001_init.sql` and verified (it applies on Postgres, RLS isolates users). Every table has `id uuid pk default gen_random_uuid()`, `user_id uuid not null default auth.uid() references auth.users`, `created_at timestamptz default now()`, RLS enabled with policy `user_id = auth.uid()` for all operations.
 
 ```
-profiles(user_id pk, timezone text default 'Asia/Kolkata', cf_handle text, gcal_calendar_id text)
+profiles(user_id unique, timezone text default 'Asia/Kolkata', cf_handle text, gcal_calendar_id text)
 
 -- Reading
-reading_sources(title, url, kind text check in ('course','blog'), start_date date, target_days int, status text default 'active')
-reading_items(source_id fk, title, url, position int, status text default 'todo' check in ('todo','done','skipped'), done_at timestamptz, note text)
-  -- unique(source_id, url)
+reading_sources(title, url, kind in ('course','blog'), start_date date, target_days int, status in ('active','archived','done'))
+reading_items(source_id fk, title, url, position int, status in ('todo','done','skipped'), done_at timestamptz, note text, unique(source_id, url))
 
 -- CP
 cp_lists(name, source text, active bool default false)
-cp_problems(list_id fk, contest_id int, idx text, name, rating int, position int, status text default 'todo' check in ('todo','solved','review','skipped'), solved_at timestamptz, note text)
-cp_daily(day date, problem_id fk, unique(day, problem_id))
+cp_problems(list_id fk, contest_id int, idx text, name, rating int, position int, status in ('todo','solved','review','skipped'), solved_at timestamptz, note text, unique(list_id, contest_id, idx))
+cp_daily(day date, problem_id fk, unique(user_id, day, problem_id))
 
 -- Work Hub: hackathons
-hackathons(name, url, status text default 'active', theme text, team text, notes text)
-hackathon_milestones(hackathon_id fk, title, due_at timestamptz, done bool default false, kind text)  -- registration, round, submission...
-hackathon_tasks(hackathon_id fk, title, due_at, done bool default false)
+hackathons(name, url, status in ('active','submitted','done','dropped'), theme, team, notes)
+hackathon_milestones(hackathon_id fk, title, due_at timestamptz, done bool, kind text, gcal_event_id text)
+hackathon_tasks(hackathon_id fk, title, due_at, done bool)
 
 -- Work Hub: research internship
-research_projects(name, org text, mentor text, active bool default true)
-research_logs(project_id fk, day date, body text)               -- daily notes
-research_tasks(project_id fk, title, assigned_by text, due_at, status text default 'todo' check in ('todo','doing','done'), priority int default 2)
-research_papers(project_id fk, title, url, status text default 'to_read' check in ('to_read','reading','done'), summary text)
-research_ideas(project_id fk, body text, status text default 'parked')
-research_experiments(project_id fk, title, hypothesis text, result text, day date)
+research_projects(name, org, mentor, active bool default true)
+research_logs(project_id fk, day date, body text, unique(project_id, day))
+research_tasks(project_id fk, title, assigned_by, due_at, status in ('todo','doing','done'), priority int 1..3 default 2, done_at)
+research_papers(project_id fk, title, url, status in ('to_read','reading','done'), summary, done_at)
+research_ideas(project_id fk, body, status default 'parked')
+research_experiments(project_id fk, title, hypothesis, result, day date)
 
 -- College
-courses(name, code, attendance_attended int default 0, attendance_total int default 0, min_pct int default 75)
-college_tasks(title, course_id fk null, kind text check in ('assignment','exam','club','other'), due_at, done bool default false, gcal_event_id text)
-gcal_events_cache(gcal_event_id unique, title, starts_at, ends_at, all_day bool)  -- read-only mirror
+courses(name, code, attendance_attended int, attendance_total int, min_pct int default 75)
+college_tasks(title, course_id fk null, kind in ('assignment','exam','club','other'), due_at, done bool, done_at, gcal_event_id)
+gcal_events_cache(gcal_event_id, title, starts_at, ends_at, all_day bool, unique(user_id, gcal_event_id))
 
 -- Cross-cutting
-inbox(body text, resolved bool default false)                    -- quick capture
-habits(name, target_per_week int default 7)
+inbox(body text, resolved bool default false)
+habits(name, target_per_week int 1..7 default 7)
 habit_logs(habit_id fk, day date, unique(habit_id, day))
+daily_notes(day date, reflection text, top3 text[], unique(user_id, day))
 ```
+Migrations are additive and forward-only. `test/migrations` is not possible in Dart; keep the SQL verified by running it against a local Postgres/PGlite when it changes (see `progress.md`).
 
-## Core domain logic (pure, tested)
-
-**Reading planner** (`planner.ts`)
-- `todayQuota(remainingItems, startDate, targetDays, today)` returns `ceil(remaining / max(1, daysLeft))` where `daysLeft = targetDays - daysElapsed`. Nothing stored; recomputed on read, so missed days redistribute automatically.
-- Today's reading tasks = first `quota` `todo` items by `position`, plus any item scheduled earlier but not done (these show as "carried over").
-- Adding a custom blog by link: target_days given by the user. If the page has no section list, create a single item and split by estimated reading time into "Part n" items (`ceil(minutes / 20)` parts).
-
-**Reading sources import** (`sitemap.ts`)
-- Fetch the source's index page server-side, extract same-origin links in document order (prefer `sitemap.xml` if present), dedupe, and present a checklist so the user picks **only the pages required**. Seed two sources: `https://designed-to-scale.vercel.app/` and `https://saadho.arushk.tech/`, each with `target_days = 30`.
-
-**CP daily picker** (`cp.ts`)
-- `pickDaily(problems, day)`: if `cp_daily` already has rows for `day`, return them; else take the first 2 problems with status `todo` (or `review` due) in list order and persist them. Idempotent.
-- Streak = consecutive days with at least 1 solved CP problem (configurable to 2) ending today or yesterday.
-- Codeforces sync (`codeforces.ts`): `GET https://codeforces.com/api/user.status?handle=<h>&from=1&count=200`; mark a problem solved when a submission has `verdict == "OK"` and matches `(contestId, index)`. Cache 10 minutes. Handle API errors gracefully.
-- TLE Eliminators lists: import via pasted CSV/JSON of `(contestId, index)` or Codeforces problem URLs. No scraping dependency. Provide a bundled sample list for demo mode.
-
-**Today view** (`today` module)
-Sections in order: Calendar strip (today's gcal events), Reading, CP, Work (due-today and overdue hackathon and research tasks, top 3), College (due soon), Habits, Inbox count. Each row has a checkbox that completes it in place (optimistic UI).
-
-**Attendance** : `canSkip(attended, total, minPct)` returns how many more classes can be missed while staying at or above minPct, or how many must be attended to recover.
-
-**Google Calendar** (`gcal.ts`)
-- Google OAuth scope `https://www.googleapis.com/auth/calendar` (read+write) requested via Supabase Auth provider options, store provider tokens server-side. Read events into `gcal_events_cache` on demand and via cron. Writing a `college_task` or hackathon milestone with a due date creates or updates a Calendar event and stores `gcal_event_id`.
-
-## Design tokens (`src/app/globals.css`)
-Dark is default. Light is a warm cream theme (the reference site uses `#f4ebe0` cream). Toggle stored in a cookie; also respects `prefers-color-scheme` on first load.
-
-```css
-:root {                       /* light (cream) */
-  --bg: #f4ebe0;  --surface: #fbf6ee;  --surface-2: #efe4d4;
-  --border: #e0d2bd;  --text: #2a2118;  --muted: #7a6a58;
-  --accent: #d97706;  --accent-fg: #ffffff;  --accent-soft: #fde9c7;
-  --success: #4d7c0f;  --danger: #b42318;
-}
-.dark {                       /* dark (default) */
-  --bg: #0c0a09;  --surface: #151311;  --surface-2: #1c1917;
-  --border: #292524;  --text: #ede7df;  --muted: #8f867b;
-  --accent: #f59e0b;  --accent-fg: #1a1203;  --accent-soft: #2b2007;
-  --success: #84cc16;  --danger: #f87171;
+## Data access
+`lib/data/db.dart` defines one small typed table repository used by every feature:
+```dart
+abstract class Db {
+  bool get isDemo;
+  Future<List<Map<String, dynamic>>> list(String table, {Map<String, Object?> where, String? orderBy, bool ascending = true});
+  Future<Map<String, dynamic>?> get(String table, String id);
+  Future<List<Map<String, dynamic>>> insert(String table, List<Map<String, dynamic>> rows);
+  Future<Map<String, dynamic>> update(String table, String id, Map<String, dynamic> patch);
+  Future<void> remove(String table, String id);
 }
 ```
-- Radius: card 12px, control 8px, pill 999px. Border: 1px solid `--border`. No shadows except a 1px inner highlight on hover.
-- Fonts via `next/font`: Geist Sans (UI) and Geist Mono (labels, numbers). Body 15px/1.6; section label 11px mono uppercase, letter-spacing 0.08em, `--muted`.
-- Spacing scale 4/8/12/16/24/40. Page padding 20px mobile, 40px desktop. Content max-width 720px (Today), 960px (other pages).
-- Components: checkbox is a 20px rounded square that fills amber with a check; progress bars are 4px tall amber on `--surface-2`; streak is a small amber flame icon with a mono number.
-- Empty states: one line of muted text plus one amber ghost button. No illustrations.
+- `DemoDb` applies column defaults, unique constraints and `on delete cascade` like the SQL does, and returns copies.
+- `SupabaseDb` maps 1:1 onto `client.from(table)`; Postgres error `23505` becomes a `DbConflict`.
+- Feature repos (`lib/data/repos/*`) wrap `Db` and return typed models. Widgets and providers only talk to repos.
+
+## Core domain logic (pure Dart, tested)
+
+**Dates** (`dates.dart`): `LocalDay` = `YYYY-MM-DD` string in the user's zone. `todayLocal(now, tz)`, `startOfDay(day, tz)`, `toLocalDay(instant, tz)`, `daysBetween(a, b)`, `addDays(day, n)`, `formatDue(dueAt, now, tz)` ("Overdue 2d", "Today", "Tomorrow", "In 5d", "Mar 14"). Uses the `timezone` package; default `Asia/Kolkata`.
+
+**Reading planner** (`planner.dart`)
+- `todayQuota(remaining, startDate, targetDays, today) = ceil(remaining / max(1, daysLeft))`, `daysLeft = targetDays - daysElapsed`. Nothing stored; recomputed on read, so missed days redistribute automatically.
+- The quota is fixed at the start of the local day: items finished today still count toward it, so ticking pages never shrinks or grows today's list.
+- Carried over = items an even pace (`total × elapsed / targetDays`) expected done before today but not done.
+- A page with no section list becomes a single item; long pages split into `ceil(minutes / 20)` "Part n" items with `#part-n` URLs.
+
+**Reading sources import** (`sitemap.dart`)
+- Fetch the page (8s timeout, own user agent), extract same-origin links under the base path in document order with link text as titles (`html` parser), merge in extra pages from `/sitemap.xml`, dedupe, return `{title, url}`. Typed errors: invalid_url, timeout, http, network, empty.
+- Seed two sources at `target_days = 30` from bundled snapshots: `designed-to-scale.vercel.app` (a client-rendered SPA with `#/module/n` routes, so its 40 lessons are bundled) and `saadho.arushk.tech` (its 141 `/topics/*` pages).
+
+**CP** (`cp.dart`, `streak.dart`)
+- `pickDaily(problems, existingDaily, day)`: if rows exist for `day`, return them; else the first 2 problems with status `todo` (or `review` first) in list order. Idempotent; the caller persists the pick.
+- Streak = consecutive local days with at least N solved (default 1, configurable to 2) ending today or yesterday. The same streak function is reused for habits.
+- Codeforces sync (`codeforces.dart`): `GET https://codeforces.com/api/user.status?handle=<h>&from=1&count=200`; mark solved when `verdict == "OK"` and `(contestId, index)` matches. Cache 10 minutes in memory. Validate the JSON shape by hand and fail with a typed error, never a crash.
+- Lists are imported from pasted CSV/JSON of `(contestId, index)` or Codeforces problem URLs. Bundled sample list for demo mode.
+
+**Attendance**: `canSkip(attended, total, minPct)` returns how many more classes can be missed while staying at or above `minPct`, or how many must be attended to recover.
+
+**Google Calendar** (`gcal.dart`): scope `https://www.googleapis.com/auth/calendar`. Read today's/upcoming events into `gcal_events_cache` on app open and pull-to-refresh. A `college_task` or hackathon milestone with a due date creates or updates a Calendar event and stores `gcal_event_id`. Client behind an interface so tests use a fake; demo mode shows sample events.
+
+**Today view**: sections in order: calendar strip, Reading, CP, Work (top 3 due/overdue across hackathon and research tasks), College (due soon), Habits, Inbox count. Every row has a checkbox that completes it in place (optimistic: update the provider state first, roll back on error). Loaded by one provider that fetches all sections in parallel (`Future.wait`), no waterfall.
+
+## Design tokens (`lib/theme/tokens.dart`)
+Dark is default. Light is a warm cream theme. The choice is stored with `shared_preferences`; "system" follows the platform brightness on first launch.
+
+```
+light (cream)                      dark (default)
+bg         #F4EBE0                 #0C0A09
+surface    #FBF6EE                 #151311
+surface2   #EFE4D4                 #1C1917
+border     #E0D2BD                 #292524
+text       #2A2118                 #EDE7DF
+muted      #6E5E4C                 #8F867B
+accent     #B45309                 #F59E0B
+accentFg   #FFFFFF                 #1A1203
+accentSoft #FDE9C7                 #2B2007
+success    #4D7C0F                 #84CC16
+danger     #B42318                 #F87171
+```
+(Light `muted`/`accent` are slightly darker than the original web spec so text meets WCAG AA on cream.)
+- Expose tokens as a `ThemeExtension<PendiColors>`; build `ThemeData` for both modes from them. No raw hex in widgets.
+- Radius: card 12, control 8, pill 999. Borders: 1px `border`. No elevation/shadows anywhere (`elevation: 0`, no `Material` shadows).
+- Type: Geist (UI) and Geist Mono (labels, numbers, dates). Body 15/1.6. Section label 11 mono uppercase, letter-spacing 0.88 (0.08em), `muted`.
+- Spacing scale 4/8/12/16/24/40. Page padding 20 on phones, 40 on wide layouts. Content max width 720 (Today), 960 (other screens).
+- Components: checkbox is a 20px rounded square that fills amber with a check; progress bars 4px amber on `surface2`; streak is a small amber flame icon with a mono number.
+- Empty states: one line of muted text plus one amber text button. No illustrations.
+- Motion: 150ms ease-out fades/slides only; honour `MediaQuery.disableAnimations`.
+
+## Brand
+- Name: **Pendi** (always lowercase in the wordmark).
+- Wordmark: "pendi" in Geist SemiBold, slightly tight tracking, with the dot of the i drawn as an amber circle. Files: `assets/brand/pendi-wordmark-dark.svg` and `-light.svg` (text converted to paths).
+- App icon: a lowercase "p" with the amber dot at its shoulder on a rounded square. `assets/brand/pendi-icon.svg/.png` (dark, default), `pendi-icon-light.*`, and `pendi-icon-foreground.*` (transparent, inside the Android adaptive-icon safe zone).
+- Regenerate with `python tool/make_logo.py` (needs `pip install fonttools`). Fonts live in `assets/fonts/`.
 
 ## Quality bar
-- Lighthouse PWA/Performance/Accessibility ≥ 90 on `/today` (mobile).
-- Today renders from a single server query batch, no waterfall.
-- Every mutation is a server action with Zod validation and optimistic UI.
+- `flutter analyze` clean with strict lints; `dart format` clean.
+- Accessibility: every interactive widget has a semantic label; tap targets ≥ 44 (`androidTapTargetGuideline`, `textContrastGuideline`, `labeledTapTargetGuideline` pass in widget tests for each main screen).
+- Today renders from one parallel fetch; first frame of Today under 1s on a mid-range Android in profile mode.
+- Every mutation goes through a repo method that validates input and returns a typed `Result`, with optimistic UI.
