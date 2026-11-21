@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F19**
+- Next commit: **F20**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -36,7 +36,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 ### Phase 3 — Work Hub
 - [x] F17 feat(hackathons): repository and list view
 - [x] F18 feat(hackathons): detail view with timeline and checklist
-- [ ] F19 feat(research): projects, daily log, and task inbox
+- [x] F19 feat(research): projects, daily log, and task inbox
 - [ ] F20 feat(research): papers, ideas, and experiments
 - [ ] F21 feat(research): weekly summary generator
 
@@ -109,6 +109,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F16 · 33c905b · persisted daily picks, solved/stuck/skip optimistic, notes, handle + sync button, streak flame, review queue; tests
 - 2026-11-21 · F17 · 967461f · HackathonRepo CRUD; list sorted by nearest open deadline with countdown + milestone progress; Work tab segments
 - 2026-11-21 · F18 · 7b4d715 · timeline + tasks w/ date pickers, overdue amber, progress %, status buttons, team/notes, Standard hackathon template; debug APK builds (phase 2 end)
+- 2026-11-21 · F19 · b81ed2b · seeded NITC project; debounced autosave log (1/day) + history; Sir's tasks quick-add via enter, overdue first, priority, status
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
