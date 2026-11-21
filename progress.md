@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F26**
+- Next commit: **F27**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -47,7 +47,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ### Phase 5 — Glue
 - [x] F25 feat(today): unified today screen
-- [ ] F26 feat(capture): quick capture sheet and inbox
+- [x] F26 feat(capture): quick capture sheet and inbox
 - [ ] F27 feat(habits): simple habits with streaks
 - [ ] F28 feat(notes): evening review
 
@@ -119,6 +119,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F23 · 331443b · college task CRUD, kind chips filter, due-soon ordering, exam countdown cards, course link
 - 2026-11-21 · F24 · ed3667f · CalendarClient interface (Google + fake w/ demo day); idempotent cache sync; dated college tasks + milestones mirrored once then updated
 - 2026-11-21 · F25 · 62b2e2c · greeting + date, calendar strip, reading, CP, work top 3, college due soon, inbox count; one parallel fetch; optimistic rows w/ rollback; tap target 48
+- 2026-11-21 · F26 · 472583e · FAB on every tab → sheet (2 taps: + then send); r:/c:/l: prefixes; inbox triage screen (done / to research / to college)
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
