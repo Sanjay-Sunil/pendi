@@ -16,9 +16,20 @@ void initTimezones() {
   _initialized = true;
 }
 
+/// The user's zone, set from their profile at startup and in Settings.
+/// Calls that use the default zone resolve to this at runtime.
+String activeTimezone = defaultTimezone;
+
+/// Whether [zone] is a known IANA name.
+bool isValidTimezone(String zone) {
+  initTimezones();
+  return zone == 'UTC' || tz.timeZoneDatabase.locations.containsKey(zone);
+}
+
 tz.Location _loc(String zone) {
   initTimezones();
-  return zone == 'UTC' ? tz.UTC : tz.getLocation(zone);
+  final z = zone == defaultTimezone ? activeTimezone : zone;
+  return z == 'UTC' ? tz.UTC : tz.getLocation(z);
 }
 
 final _dayRe = RegExp(r'^\d{4}-\d{2}-\d{2}$');

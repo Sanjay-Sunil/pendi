@@ -251,6 +251,7 @@ class _AddCollegeTaskFormState extends ConsumerState<AddCollegeTaskForm> {
         if (courses.isNotEmpty) ...[
           const SizedBox(height: 12),
           DropdownButtonFormField<String?>(
+            isExpanded: true,
             initialValue: _courseId,
             decoration: const InputDecoration(labelText: 'Course'),
             items: [

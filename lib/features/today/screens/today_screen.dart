@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../data/models/research.dart';
 import '../../../data/providers.dart';
@@ -49,6 +50,11 @@ class TodayScreen extends ConsumerWidget {
       label: formatDayLabel(todayLocal(now)),
       maxWidth: Tokens.maxToday,
       actions: [
+        IconButton(
+          tooltip: 'Settings',
+          icon: const Icon(LucideIcons.settings, size: 18),
+          onPressed: () => context.push('/settings'),
+        ),
         AppButton(
           label: 'Review',
           small: true,

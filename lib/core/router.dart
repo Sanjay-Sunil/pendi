@@ -10,6 +10,7 @@ import '../features/cp/screens/cp_screen.dart';
 import '../features/dev/gallery_screen.dart';
 import '../features/hackathons/screens/hackathon_detail_screen.dart';
 import '../features/reading/screens/reading_screen.dart';
+import '../features/settings/settings_screen.dart';
 import '../features/today/screens/today_screen.dart';
 import '../features/work/screens/work_screen.dart';
 import '../shell/app_shell.dart';
@@ -47,6 +48,7 @@ GoRouter buildRouter({
     GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
     GoRoute(path: '/dev/ui', builder: (_, _) => const GalleryScreen()),
     GoRoute(path: '/inbox', builder: (_, _) => const InboxScreen()),
+    GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen()),
     GoRoute(
       path: '/work/hackathon/:id',
       builder: (_, s) => HackathonDetailScreen(id: s.pathParameters['id']!),

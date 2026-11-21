@@ -11,6 +11,7 @@ import 'theme/theme_mode_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initTimezones();
+  if (isValidTimezone(Env.appTimezone)) activeTimezone = Env.appTimezone;
   if (!Env.isDemo) {
     await Supabase.initialize(
       url: Env.supabaseUrl,
