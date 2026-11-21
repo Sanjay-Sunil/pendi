@@ -5,10 +5,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app.dart';
 import 'core/env.dart';
+import 'domain/dates.dart';
 import 'theme/theme_mode_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initTimezones();
   if (!Env.isDemo) {
     await Supabase.initialize(
       url: Env.supabaseUrl,
