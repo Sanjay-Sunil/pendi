@@ -6,6 +6,7 @@ import 'db.dart';
 import 'models/reading.dart';
 import 'repos/cp_repo.dart';
 import 'repos/reading_repo.dart';
+import 'repos/research_repo.dart';
 
 /// Loads bundled JSON assets; overridable in tests.
 typedef AssetLoader = Future<String> Function(String path);
@@ -52,4 +53,6 @@ Future<void> seedDemo(
     parseProblemList(await loadAsset('assets/seed/cp-sample.json')).problems,
     source: 'bundled sample',
   );
+
+  await ResearchRepo(db, now: () => now).project();
 }
