@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C11**
+- Next commit: **C12**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -23,7 +23,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C08 feat(domain): reading quota planner
 - [x] C09 feat(reading): sources and items data layer with actions
 - [x] C10 feat(integrations): link extractor for course and blog pages
-- [ ] C11 feat(reading): add-source flow with page picker
+- [x] C11 feat(reading): add-source flow with page picker
 - [ ] C12 feat(reading): reading screen and per-source progress
 
 ### Phase 2 — CP Tracker
@@ -62,6 +62,8 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+- C11 · saadho seed = its 141 `/topics/*` pages only · the rest are app/company pages, not reading
+- C11 · failed extraction falls back to adding the link as a single page · matches build.md "no section list → single item"
 - C10 · extractor merges HTML links (order+titles) with sitemap-only pages · sitemap alone loses titles and course order
 - C10 · designed-to-scale.vercel.app is a client-rendered SPA with `#/module/n` routes, so extraction finds nothing; its 40 lessons are bundled as seed data in C11 · no headless browser dependency
 - C10 · live-network tests run only with `LIVE_NETWORK=1` · keeps the gate offline-safe
@@ -100,6 +102,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C08 · b85195f · todayQuota/todaysItems/carry-over/time split; 13 tests
 - 2026-11-21 · C09 · fc9c886 · lib/db/reading + zod-validated server actions; ActionResult helper
 - 2026-11-21 · C10 · b0d366c · extractPages w/ fixtures; live: saadho ok, designed-to-scale is a hash-routed SPA (empty)
+- 2026-11-21 · C11 · 36470f1 · add sheet: extract → pick/reorder → create; seeds 40 + 141 pages at 30 days; e2e checked
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
