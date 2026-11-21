@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F32**
+- Next commit: **F33**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -55,7 +55,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F29 feat(app): launcher icons, splash, and offline cache
 - [x] F30 feat(settings): profile, timezone, codeforces handle, data export
 - [x] F31 test(e2e): smoke flows
-- [ ] F32 chore: a11y, performance, and empty-state pass
+- [x] F32 chore: a11y, performance, and empty-state pass
 - [ ] F33 docs: README, setup guide, and handover
 
 ## Decisions
@@ -130,6 +130,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F29 · c978407 · adaptive + legacy Android icons, Android 12 splash + launch layer, web icons/manifest/theme-color; Today snapshot cached in prefs and shown offline with a banner
 - 2026-11-21 · F30 · acc6fe7 · settings from Today header: theme, timezone (runtime activeTimezone), CF handle, sign out; JSON export validated against every table model before sharing
 - 2026-11-21 · F31 · b7db94a · integration_test in demo mode: add source + complete page, CP solved, r: capture shows on Today; tool/e2e.sh (chromedriver, headless) passes
+- 2026-11-21 · F32 · 0d39936 · guideline tests on every main screen x2 themes; wide-layout overflow check; research tasks empty state; deferred Settings/gallery; perf numbers recorded
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
