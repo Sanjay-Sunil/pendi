@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C02**
+- Next commit: **C03**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -12,7 +12,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ### Phase 0 — Foundation
 - [x] C01 chore: bootstrap Next.js app with tooling
-- [ ] C02 feat(ui): design tokens, fonts, theme toggle
+- [x] C02 feat(ui): design tokens, fonts, theme toggle
 - [ ] C03 feat(ui): core primitives
 - [ ] C04 feat(shell): app layout with rail and mobile tab bar
 - [ ] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
@@ -63,6 +63,9 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
 - C01 · app lives at repo root, not a `daybook/` subfolder · planning docs already at root; single package simpler
+- C02 · light `--muted` #6e5e4c and `--accent` #b45309 (vs spec #7a6a58/#d97706) · spec values fail AA contrast on cream
+- C02 · theme via inline pre-paint script + cookie, not server cookies() · keeps routes static, still no flash
+- C02 · `scripts/smoke.mjs` headless check of routes in both themes at 375/1280px · used as the UI gate
 - C01 · pnpm pinned with project `mise.toml` · no global pnpm on machine
 
 ## Blockers
@@ -78,6 +81,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 ## Log
 <!-- newest at bottom -->
 - 2026-11-21 · C01 · 05f03ad · Next 15.5 + Tailwind 4 + Vitest scaffold; gate green
+- 2026-11-21 · C02 · 7e0b0cc · tokens + cookie theme with pre-paint script; smoke ok both themes
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
