@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C10**
+- Next commit: **C11**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -22,7 +22,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 ### Phase 1 — Reading Planner
 - [x] C08 feat(domain): reading quota planner
 - [x] C09 feat(reading): sources and items data layer with actions
-- [ ] C10 feat(integrations): link extractor for course and blog pages
+- [x] C10 feat(integrations): link extractor for course and blog pages
 - [ ] C11 feat(reading): add-source flow with page picker
 - [ ] C12 feat(reading): reading screen and per-source progress
 
@@ -62,6 +62,9 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+- C10 · extractor merges HTML links (order+titles) with sitemap-only pages · sitemap alone loses titles and course order
+- C10 · designed-to-scale.vercel.app is a client-rendered SPA with `#/module/n` routes, so extraction finds nothing; its 40 lessons are bundled as seed data in C11 · no headless browser dependency
+- C10 · live-network tests run only with `LIVE_NETWORK=1` · keeps the gate offline-safe
 - C08 · quota uses remaining-at-start-of-day (todo + done today) · otherwise ticking a page would shrink today's list
 - C08 · carried-over = items an even pace (total×elapsed/target) expected done before today · simple, explainable
 - C06 · Google provider refresh token is not persisted yet · token storage table lands with gcal in C24 (additive migration)
@@ -96,6 +99,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C07 · 89f95a6 · todayLocal/startOfDay/daysBetween/addDays/formatDue; IST boundary tests
 - 2026-11-21 · C08 · b85195f · todayQuota/todaysItems/carry-over/time split; 13 tests
 - 2026-11-21 · C09 · fc9c886 · lib/db/reading + zod-validated server actions; ActionResult helper
+- 2026-11-21 · C10 · b0d366c · extractPages w/ fixtures; live: saadho ok, designed-to-scale is a hash-routed SPA (empty)
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
