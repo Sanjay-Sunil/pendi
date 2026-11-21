@@ -133,4 +133,24 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F32 · 0d39936 · guideline tests on every main screen x2 themes; wide-layout overflow check; research tasks empty state; deferred Settings/gallery; perf numbers recorded
 
 ## Handover (written in F33)
-<!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
+
+**What works (demo mode, verified by 162 unit/widget tests + 3 Chrome smoke flows):**
+- Today: greeting, calendar strip, reading pages, CP daily 2 + streak, work top 3 (hackathon + research), college due soon, habits with streaks, inbox count, yesterday's top 3, evening review. Rows complete in place (optimistic, roll back on error). Offline: last Today is cached and shown with a banner.
+- Reading: add a link → pick/reorder pages → daily quota that redistributes missed days, carry-over badges, notes, archive. Seeded with Designed to Scale (40) and Saadho (141) at 30 days.
+- CP: import lists (CF URLs, CSV, `1950B`, JSON) with per-line errors, active list, persisted daily picks, solved/stuck/skip, notes, review queue, Codeforces sync (cached 10 min).
+- Work: hackathons (deadline sort, countdowns, timeline, template, tasks, team/notes, status); research (tasks with priority and overdue-first, autosaving daily log + history, papers/ideas/experiments with one search box, weekly Markdown summary with copy/share).
+- College: courses with attendance and skip calculator, tasks by kind with exam countdowns.
+- Quick capture from every tab (`r:` / `c:` / `l:`), inbox triage, settings (theme, timezone, CF handle, JSON export validated against every table model), Android icons + splash.
+
+**What is mocked or limited:**
+- Demo mode: data is in memory and resets on restart; Calendar uses a fake sample day.
+- Google sign-in, Supabase sync and real Calendar read/write are implemented but untested against live services (no keys in this environment).
+- Link extraction is blocked by CORS in the web build (falls back to one page); it works on Android.
+- Not run here: the app on a physical Android phone/emulator, and a profile-mode Today timing (no device available). The debug APK builds.
+
+**Env vars to set (`env.json`):** `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GOOGLE_WEB_CLIENT_ID`, optional `APP_TIMEZONE`. See `docs/SETUP.md`.
+
+**3 manual steps:**
+1. Supabase project: create it and run `supabase/migrations/0001_init.sql`.
+2. Google OAuth client IDs: enable Calendar API, create Web + Android (debug and release SHA-1) clients, enable the Google provider in Supabase.
+3. Release APK: create a keystore, wire `key.properties`, `flutter build apk --release --dart-define-from-file=env.json`.
