@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/auth_repo.dart';
 import '../features/auth/screens/login_screen.dart';
+import '../features/capture/capture_sheet.dart';
+import '../features/capture/screens/inbox_screen.dart';
 import '../features/college/screens/college_screen.dart';
 import '../features/cp/screens/cp_screen.dart';
 import '../features/dev/gallery_screen.dart';
@@ -35,7 +37,6 @@ GoRouter buildRouter({
   required bool demo,
   Listenable? refresh,
   String initialLocation = '/today',
-  Widget? fab,
 }) => GoRouter(
   initialLocation: initialLocation,
   refreshListenable: refresh,
@@ -45,6 +46,7 @@ GoRouter buildRouter({
     GoRoute(path: '/', redirect: (_, _) => '/today'),
     GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
     GoRoute(path: '/dev/ui', builder: (_, _) => const GalleryScreen()),
+    GoRoute(path: '/inbox', builder: (_, _) => const InboxScreen()),
     GoRoute(
       path: '/work/hackathon/:id',
       builder: (_, s) => HackathonDetailScreen(id: s.pathParameters['id']!),
@@ -53,7 +55,7 @@ GoRouter buildRouter({
       builder: (_, _, shell) => AppShell(
         shell: shell,
         banner: demo ? const DemoBanner() : null,
-        fab: fab,
+        fab: const CaptureFab(),
       ),
       branches: [
         _branch('/today', const TodayScreen()),
