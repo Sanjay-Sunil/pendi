@@ -81,6 +81,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - F26 · `l:` capture adds the link as a one-page reading source due in 3 days; `c:` creates an `other` college task · fastest path; details editable later. `capture` is a composition feature like today/work
 - F31 · `r:` captures default to due 23:59 today so they show on Today · capture means "do today"; editable later
 - F31 · integration tests run in Chrome via `flutter drive` + chromedriver (no Android emulator installed) · `tool/e2e.sh`
+- 2026-11-21 · Supabase project `pendi` (ref nqnwlspndyutndhtdxwy, ap-south-1, org Sanjay-Sunil) created with the CLI; 0001 pushed; 22/22 tables RLS-on; `env.json` and `supabase/.db-password` written locally and git-ignored
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers
@@ -152,6 +153,6 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 **Env vars to set (`env.json`):** `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GOOGLE_WEB_CLIENT_ID`, optional `APP_TIMEZONE`. See `docs/SETUP.md`.
 
 **3 manual steps:**
-1. Supabase project: create it and run `supabase/migrations/0001_init.sql`.
+1. ~~Supabase project~~ Done: project `pendi` exists, migration applied, `env.json` filled with URL + publishable key (local only).
 2. Google OAuth client IDs: enable Calendar API, create Web + Android (debug and release SHA-1) clients, enable the Google provider in Supabase.
 3. Release APK: create a keystore, wire `key.properties`, `flutter build apk --release --dart-define-from-file=env.json`.

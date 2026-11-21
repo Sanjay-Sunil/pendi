@@ -50,3 +50,8 @@ app.*.map.json
 # Local config (secrets)
 env.json
 /android/.kotlin/
+
+# Supabase local secrets
+supabase/.db-password
+supabase/.temp/
+supabase/.branches/
