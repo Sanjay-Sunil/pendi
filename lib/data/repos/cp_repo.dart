@@ -89,4 +89,17 @@ class CpRepo {
       }),
     ),
   );
+
+  /// Marks problems whose key is in [solvedKeys] as solved. Returns how many changed.
+  Future<Result<int>> markSolved(Set<String> solvedKeys) =>
+      Result.guard(() async {
+        var n = 0;
+        for (final p in await problems()) {
+          if (p.status != CpStatus.solved && solvedKeys.contains(p.key)) {
+            await setStatus(p.id, CpStatus.solved);
+            n++;
+          }
+        }
+        return n;
+      });
 }
