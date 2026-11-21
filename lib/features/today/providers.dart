@@ -12,6 +12,7 @@ import '../habits/providers.dart';
 import '../hackathons/providers.dart';
 import '../reading/providers.dart';
 import '../research/providers.dart';
+import 'today_cache.dart';
 
 enum WorkSource { hackathonTask, milestone, research }
 
@@ -112,7 +113,7 @@ final todayProvider = FutureProvider<TodayData>((ref) async {
   );
 
   final soon = startOfDay(addDays(day, 8));
-  return TodayData(
+  final data = TodayData(
     day: day,
     events: events,
     reading: reading,
@@ -124,6 +125,8 @@ final todayProvider = FutureProvider<TodayData>((ref) async {
         .toList(),
     inboxCount: inbox.length,
   );
+  await ref.read(todayCacheProvider).save(TodaySnapshot.fromData(data, now));
+  return data;
 });
 
 void invalidateToday(WidgetRef ref) {

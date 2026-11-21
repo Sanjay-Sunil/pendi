@@ -28,6 +28,8 @@ Future<void> pumpApp(
   final prefs = await testPrefs({'theme_mode': theme});
   await tester.pumpWidget(
     ProviderScope(
+      // No automatic retries in tests: failures should surface immediately.
+      retry: (_, _) => null,
       overrides: [
         sharedPrefsProvider.overrideWithValue(prefs),
         authRepoProvider.overrideWithValue(repo),

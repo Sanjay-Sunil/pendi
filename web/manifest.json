@@ -1,11 +1,11 @@
 {
-    "name": "pendi",
-    "short_name": "pendi",
-    "start_url": ".",
+    "name": "Pendi",
+    "short_name": "Pendi",
+    "start_url": "./",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0C0A09",
+    "theme_color": "#0C0A09",
+    "description": "A calm daily planner for reading, CP, work, and college.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

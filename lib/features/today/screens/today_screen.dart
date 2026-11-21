@@ -22,8 +22,10 @@ import '../../notes/providers.dart';
 import '../../reading/widgets/reading_item_row.dart';
 import '../../research/providers.dart';
 import '../providers.dart';
+import '../today_cache.dart';
 import '../widgets/calendar_strip.dart';
 import '../widgets/check_row.dart';
+import '../widgets/offline_today.dart';
 
 String greeting(DateTime now) {
   final hour = int.parse(formatTime(now).split(':').first);
@@ -65,7 +67,7 @@ class TodayScreen extends ConsumerWidget {
       children: [
         if (d == null && today.isLoading) const LinearProgressIndicator(),
         if (today.hasError && d == null)
-          Text('Could not load today: ${today.error}'),
+          OfflineToday(snapshot: ref.read(todayCacheProvider).load()),
         if (d != null) ...[
           if ((ref.watch(todayTop3Provider).value ?? const []).isNotEmpty) ...[
             const SectionLabel('Top 3'),
