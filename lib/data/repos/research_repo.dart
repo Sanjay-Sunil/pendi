@@ -117,4 +117,107 @@ class ResearchRepo {
           }),
         ),
       );
+
+  // Papers, ideas, experiments ------------------------------------------------
+
+  Future<List<ResearchPaper>> papers() async {
+    final p = await project();
+    return (await _db.list(
+      'research_papers',
+      where: {'project_id': p.id},
+      orderBy: 'created_at',
+    )).map(ResearchPaper.fromJson).toList();
+  }
+
+  Future<Result<ResearchPaper>> addPaper(String title, {String? url}) =>
+      Result.guard(() async {
+        final p = await project();
+        return ResearchPaper.fromJson(
+          (await _db.insert('research_papers', [
+            {
+              'project_id': p.id,
+              'title': requireText(title, 'Title', max: 300),
+              'url': (url ?? '').trim().isEmpty
+                  ? null
+                  : requireUrl(url, 'Link'),
+            },
+          ])).single,
+        );
+      });
+
+  Future<Result<ResearchPaper>> updatePaper(
+    String id, {
+    PaperStatus? status,
+    String? summary,
+  }) => Result.guard(() async {
+    final patch = <String, Object?>{
+      if (status != null) 'status': status.db,
+      if (status != null)
+        'done_at': status == PaperStatus.done ? isoOrNull(_now()) : null,
+      if (summary != null)
+        'summary': summary.trim().isEmpty ? null : summary.trim(),
+    };
+    return ResearchPaper.fromJson(
+      await _db.update('research_papers', id, patch),
+    );
+  });
+
+  Future<List<ResearchIdea>> ideas() async {
+    final p = await project();
+    return (await _db.list(
+      'research_ideas',
+      where: {'project_id': p.id},
+      orderBy: 'created_at',
+      ascending: false,
+    )).map(ResearchIdea.fromJson).toList();
+  }
+
+  Future<Result<ResearchIdea>> addIdea(String body) => Result.guard(() async {
+    final p = await project();
+    return ResearchIdea.fromJson(
+      (await _db.insert('research_ideas', [
+        {'project_id': p.id, 'body': requireText(body, 'Idea', max: 1000)},
+      ])).single,
+    );
+  });
+
+  Future<Result<void>> setIdeaStatus(String id, String status) =>
+      Result.guard(() => _db.update('research_ideas', id, {'status': status}));
+
+  Future<List<ResearchExperiment>> experiments() async {
+    final p = await project();
+    return (await _db.list(
+      'research_experiments',
+      where: {'project_id': p.id},
+      orderBy: 'day',
+      ascending: false,
+    )).map(ResearchExperiment.fromJson).toList();
+  }
+
+  Future<Result<ResearchExperiment>> addExperiment({
+    required String title,
+    required LocalDay day,
+    String? hypothesis,
+    String? result,
+  }) => Result.guard(() async {
+    final p = await project();
+    return ResearchExperiment.fromJson(
+      (await _db.insert('research_experiments', [
+        {
+          'project_id': p.id,
+          'title': requireText(title, 'Title', max: 300),
+          'day': day,
+          'hypothesis': (hypothesis ?? '').trim().isEmpty
+              ? null
+              : hypothesis!.trim(),
+          'result': (result ?? '').trim().isEmpty ? null : result!.trim(),
+        },
+      ])).single,
+    );
+  });
+
+  Future<Result<void>> setExperimentResult(String id, String result) =>
+      Result.guard(
+        () => _db.update('research_experiments', id, {'result': result.trim()}),
+      );
 }

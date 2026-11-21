@@ -18,3 +18,20 @@ final researchLogsProvider = FutureProvider<List<ResearchLog>>(
 final researchTasksProvider = FutureProvider<List<ResearchTask>>(
   (ref) async => (await ref.watch(researchRepoProvider.future)).tasks(),
 );
+
+class ResearchLibrary {
+  const ResearchLibrary(this.papers, this.ideas, this.experiments);
+  final List<ResearchPaper> papers;
+  final List<ResearchIdea> ideas;
+  final List<ResearchExperiment> experiments;
+}
+
+final researchLibraryProvider = FutureProvider<ResearchLibrary>((ref) async {
+  final repo = await ref.watch(researchRepoProvider.future);
+  final (p, i, e) = await (
+    repo.papers(),
+    repo.ideas(),
+    repo.experiments(),
+  ).wait;
+  return ResearchLibrary(p, i, e);
+});

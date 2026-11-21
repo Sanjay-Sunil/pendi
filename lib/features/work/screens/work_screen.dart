@@ -21,6 +21,7 @@ class WorkScreen extends ConsumerWidget {
         ref.invalidate(hackathonsProvider);
         ref.invalidate(researchTasksProvider);
         ref.invalidate(researchLogsProvider);
+        ref.invalidate(researchLibraryProvider);
       },
       children: const [
         AppTabs(
