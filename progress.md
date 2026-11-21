@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C07**
+- Next commit: **C08**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -17,7 +17,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C04 feat(shell): app layout with rail and mobile tab bar
 - [x] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
 - [x] C06 feat(auth): google sign-in and route protection
-- [ ] C07 feat(domain): date utilities with timezone tests
+- [x] C07 feat(domain): date utilities with timezone tests
 
 ### Phase 1 — Reading Planner
 - [ ] C08 feat(domain): reading quota planner
@@ -91,6 +91,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C04 · d2125e7 · rail + bottom tabs, 5 stub routes, / redirects to /today; smoke ok 375/1280
 - 2026-11-21 · C05 · 59d7456 · generic typed Db interface; demo + supabase adapters; migration verified on PGlite incl. RLS
 - 2026-11-21 · C06 · 8e266ef · Google OAuth w/ calendar scope + offline; middleware redirect tested; demo banner
+- 2026-11-21 · C07 · 89f95a6 · todayLocal/startOfDay/daysBetween/addDays/formatDue; IST boundary tests
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
