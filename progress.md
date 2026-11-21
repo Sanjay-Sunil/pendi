@@ -74,6 +74,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
   - Reading quota fixed at start of local day; carried-over = behind an even pace
   - Link extractor: HTML link order + titles first, sitemap-only pages appended; designed-to-scale is a hash-routed SPA so its 40 lessons are bundled; saadho seed = its 141 `/topics/*` pages
   - Live-network tests opt-in only
+- F04 · wordmark shown as PNG (rendered from the SVG with rsvg-convert) · flutter_svg conflicts with xml ^7 needed by the extractor
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pendi/theme/app_theme.dart';
 import 'package:pendi/theme/theme_mode_provider.dart';
@@ -20,7 +21,7 @@ Future<void> pumpThemed(
   Brightness brightness = Brightness.dark,
   double width = 375,
   double height = 800,
-  List<dynamic> overrides = const [],
+  List<Override> overrides = const [],
 }) async {
   tester.view.physicalSize = Size(width, height);
   tester.view.devicePixelRatio = 1;
