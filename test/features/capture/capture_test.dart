@@ -20,9 +20,13 @@ void main() {
   }
 
   testWidgets('r: creates a research task that shows on Today', (tester) async {
-    await pumpApp(tester, location: '/cp', height: 2400);
+    await pumpApp(tester, height: 2400);
     await captureText(tester, 'r: Email sir the ablation table');
     expect(find.text('Research task added'), findsOneWidget);
+    expect(
+      find.text('Email sir the ablation table · Research'),
+      findsOneWidget,
+    );
     await tester.tap(find.text('Work').last);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Research'));

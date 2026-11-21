@@ -20,8 +20,12 @@ Future<Result<String>> capture(Ref ref, String input) async {
       final r = await (await ref.read(inboxRepoProvider.future)).add(p.body);
       res = r.isOk ? const Ok('Saved to inbox') : Err(r.errorOrNull!);
     case CaptureKind.researchTask:
+      // Captured tasks are for today: due 23:59 local so they appear on Today.
+      final tonight = startOfDay(
+        addDays(todayLocal(ref.read(clockProvider)()), 1),
+      ).subtract(const Duration(minutes: 1));
       final r = await (await ref.read(researchRepoProvider.future))
-          .addTask(p.body);
+          .addTask(p.body, dueAt: tonight);
       res = r.isOk ? const Ok('Research task added') : Err(r.errorOrNull!);
     case CaptureKind.collegeTask:
       final r = await (await ref.read(collegeRepoProvider.future))

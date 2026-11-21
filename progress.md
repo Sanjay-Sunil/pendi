@@ -79,6 +79,8 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - F17/F25 · `work` and `today` are composition screens and may import other features' providers/widgets; all other features stay independent · they exist to combine modules
 - F24 · Calendar providers live in `lib/data/gcal_providers.dart` · shared by college and hackathons without cross-feature imports
 - F26 · `l:` capture adds the link as a one-page reading source due in 3 days; `c:` creates an `other` college task · fastest path; details editable later. `capture` is a composition feature like today/work
+- F31 · `r:` captures default to due 23:59 today so they show on Today · capture means "do today"; editable later
+- F31 · integration tests run in Chrome via `flutter drive` + chromedriver (no Android emulator installed) · `tool/e2e.sh`
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers
