@@ -4,14 +4,14 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C01**
-- Gate status: not run yet
+- Next commit: **C02**
+- Gate status: green
 - Mode: demo (no env keys set)
 
 ## Checklist
 
 ### Phase 0 — Foundation
-- [ ] C01 chore: bootstrap Next.js app with tooling
+- [x] C01 chore: bootstrap Next.js app with tooling
 - [ ] C02 feat(ui): design tokens, fonts, theme toggle
 - [ ] C03 feat(ui): core primitives
 - [ ] C04 feat(shell): app layout with rail and mobile tab bar
@@ -62,6 +62,8 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
 - CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
 - "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+- C01 · app lives at repo root, not a `daybook/` subfolder · planning docs already at root; single package simpler
+- C01 · pnpm pinned with project `mise.toml` · no global pnpm on machine
 
 ## Blockers
 <!-- Agent: exact error, what was tried, what the user must do. -->
@@ -75,6 +77,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Log
 <!-- newest at bottom -->
+- 2026-11-21 · C01 · 05f03ad · Next 15.5 + Tailwind 4 + Vitest scaffold; gate green
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
