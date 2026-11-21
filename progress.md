@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F17**
+- Next commit: **F18**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -34,7 +34,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F16 feat(cp): cp screen with daily 2, streak, and review queue
 
 ### Phase 3 — Work Hub
-- [ ] F17 feat(hackathons): repository and list view
+- [x] F17 feat(hackathons): repository and list view
 - [ ] F18 feat(hackathons): detail view with timeline and checklist
 - [ ] F19 feat(research): projects, daily log, and task inbox
 - [ ] F20 feat(research): papers, ideas, and experiments
@@ -107,6 +107,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F14 · 4ccfd79 · parser for CF URLs/CSV/joined ids/JSON with per-line errors; CpRepo; lists UI (import/rename/activate); 20-problem bundled sample
 - 2026-11-21 · F15 · 27bf96c · hand-validated user.status parsing, 10-min cache, typed errors; ProfileRepo for handle; CpSync notifier; fixture tests
 - 2026-11-21 · F16 · 33c905b · persisted daily picks, solved/stuck/skip optimistic, notes, handle + sync button, streak flame, review queue; tests
+- 2026-11-21 · F17 · 967461f · HackathonRepo CRUD; list sorted by nearest open deadline with countdown + milestone progress; Work tab segments
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
