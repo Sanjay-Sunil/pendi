@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F04**
+- Next commit: **F05**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -15,7 +15,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F01 chore: replace Next.js scaffold with Flutter app
 - [x] F02 feat(ui): design tokens, fonts, theme mode
 - [x] F03 feat(ui): core primitives
-- [ ] F04 feat(shell): tab scaffold with rail and bottom bar
+- [x] F04 feat(shell): tab scaffold with rail and bottom bar
 - [ ] F05 feat(data): db interface, demo adapter, supabase adapter
 - [ ] F06 feat(auth): google sign-in and auth gate
 - [ ] F07 feat(domain): date utilities with timezone tests
@@ -93,6 +93,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F01 · b3adb9d · flutter create at root, strict lints, env.example.json, seeds/fixtures moved, gate script
 - 2026-11-21 · F02 · 49ab657 · PendiColors ThemeExtension, Geist fonts, persisted theme mode; tests
 - 2026-11-21 · F03 · 4d323ae · 11 primitives + PageScaffold + gallery; a11y guideline tests in both themes
+- 2026-11-21 · F04 · 19d4295 · StatefulShellRoute, 5 stub tabs, rail ≥600dp with wordmark; tests at 375/1280
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
