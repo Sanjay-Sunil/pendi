@@ -92,8 +92,9 @@ class ReadingRepo {
 
   Future<Result<ReadingItem>> setNote(String id, String note) =>
       Result.guard(() async {
-        if (note.length > 280)
+        if (note.length > 280) {
           throw const ValidationError('Note is too long (max 280)');
+        }
         return ReadingItem.fromJson(
           await _db.update('reading_items', id, {
             'note': note.trim().isEmpty ? null : note.trim(),
