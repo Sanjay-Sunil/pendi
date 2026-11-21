@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pendi/app.dart';
 import 'package:pendi/core/router.dart';
+import 'package:pendi/features/auth/auth_repo.dart';
+import 'package:pendi/features/auth/providers.dart';
 import 'package:pendi/theme/theme_mode_provider.dart';
 
 import 'pump.dart';
@@ -16,17 +18,24 @@ Future<void> pumpApp(
   double height = 800,
   String theme = 'dark',
   List<Override> overrides = const [],
+  AuthRepo? auth,
 }) async {
   tester.view.physicalSize = Size(width, height);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
+  final repo = auth ?? DemoAuthRepo();
   final prefs = await testPrefs({'theme_mode': theme});
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
         sharedPrefsProvider.overrideWithValue(prefs),
+        authRepoProvider.overrideWithValue(repo),
         routerProvider.overrideWithValue(
-          buildRouter(initialLocation: location),
+          buildRouter(
+            auth: auth ?? DemoAuthRepo(),
+            demo: true,
+            initialLocation: location,
+          ),
         ),
         ...overrides,
       ],
