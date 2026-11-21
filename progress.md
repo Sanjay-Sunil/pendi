@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F13**
+- Next commit: **F14**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -28,7 +28,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F12 feat(reading): reading screen and per-source progress
 
 ### Phase 2 — CP Tracker
-- [ ] F13 feat(domain): cp daily picker and streak
+- [x] F13 feat(domain): cp daily picker and streak
 - [ ] F14 feat(cp): list import and active list management
 - [ ] F15 feat(integrations): codeforces solved-status sync
 - [ ] F16 feat(cp): cp screen with daily 2, streak, and review queue
@@ -103,6 +103,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F10 · a854b72 · html/xml parsers, injectable http client, typed errors, 8s timeout; fixtures + opt-in live test (both pass)
 - 2026-11-21 · F11 · 94ad4ec · sheet: find → pick/reorder → create; fallback to single page; seeds 40 + 141 pages at 30 days; widget tests
 - 2026-11-21 · F12 · 1ff4098 · cards: progress, days left, optimistic ticks w/ rollback, 2-line notes, carried-over badge, archive; multi-day provider test; a11y
+- 2026-11-21 · F13 · e147c80 · pickDaily (idempotent, review first), canonicalKey, generic streak + countByDay
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
