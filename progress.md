@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C04**
+- Next commit: **C05**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -14,7 +14,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - [x] C01 chore: bootstrap Next.js app with tooling
 - [x] C02 feat(ui): design tokens, fonts, theme toggle
 - [x] C03 feat(ui): core primitives
-- [ ] C04 feat(shell): app layout with rail and mobile tab bar
+- [x] C04 feat(shell): app layout with rail and mobile tab bar
 - [ ] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
 - [ ] C06 feat(auth): google sign-in and route protection
 - [ ] C07 feat(domain): date utilities with timezone tests
@@ -83,6 +83,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C01 · 05f03ad · Next 15.5 + Tailwind 4 + Vitest scaffold; gate green
 - 2026-11-21 · C02 · 7e0b0cc · tokens + cookie theme with pre-paint script; smoke ok both themes
 - 2026-11-21 · C03 · af82807 · 11 primitives + /dev/ui gallery; smoke ok
+- 2026-11-21 · C04 · d2125e7 · rail + bottom tabs, 5 stub routes, / redirects to /today; smoke ok 375/1280
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
