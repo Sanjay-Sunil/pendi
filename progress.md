@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **C09**
+- Next commit: **C10**
 - Gate status: green
 - Mode: demo (no env keys set)
 
@@ -21,7 +21,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 
 ### Phase 1 — Reading Planner
 - [x] C08 feat(domain): reading quota planner
-- [ ] C09 feat(reading): sources and items data layer with actions
+- [x] C09 feat(reading): sources and items data layer with actions
 - [ ] C10 feat(integrations): link extractor for course and blog pages
 - [ ] C11 feat(reading): add-source flow with page picker
 - [ ] C12 feat(reading): reading screen and per-source progress
@@ -95,6 +95,7 @@ Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
 - 2026-11-21 · C06 · 8e266ef · Google OAuth w/ calendar scope + offline; middleware redirect tested; demo banner
 - 2026-11-21 · C07 · 89f95a6 · todayLocal/startOfDay/daysBetween/addDays/formatDue; IST boundary tests
 - 2026-11-21 · C08 · b85195f · todayQuota/todaysItems/carry-over/time split; 13 tests
+- 2026-11-21 · C09 · fc9c886 · lib/db/reading + zod-validated server actions; ActionResult helper
 
 ## Handover (written in C33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
