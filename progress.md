@@ -1,0 +1,80 @@
+# progress.md — Live Build Tracker
+
+Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]` done, `[!]` blocked (add reason).
+Log line format: `YYYY-MM-DD · Cxx · <short hash> · one-line note`
+
+## Current state
+- Next commit: **C01**
+- Gate status: not run yet
+- Mode: demo (no env keys set)
+
+## Checklist
+
+### Phase 0 — Foundation
+- [ ] C01 chore: bootstrap Next.js app with tooling
+- [ ] C02 feat(ui): design tokens, fonts, theme toggle
+- [ ] C03 feat(ui): core primitives
+- [ ] C04 feat(shell): app layout with rail and mobile tab bar
+- [ ] C05 feat(data): supabase clients, demo-mode adapter, and migration 0001
+- [ ] C06 feat(auth): google sign-in and route protection
+- [ ] C07 feat(domain): date utilities with timezone tests
+
+### Phase 1 — Reading Planner
+- [ ] C08 feat(domain): reading quota planner
+- [ ] C09 feat(reading): sources and items data layer with actions
+- [ ] C10 feat(integrations): link extractor for course and blog pages
+- [ ] C11 feat(reading): add-source flow with page picker
+- [ ] C12 feat(reading): reading screen and per-source progress
+
+### Phase 2 — CP Tracker
+- [ ] C13 feat(domain): cp daily picker and streak
+- [ ] C14 feat(cp): list import and active list management
+- [ ] C15 feat(integrations): codeforces solved-status sync
+- [ ] C16 feat(cp): cp screen with daily 2, streak, and review queue
+
+### Phase 3 — Work Hub
+- [ ] C17 feat(hackathons): data layer and list view
+- [ ] C18 feat(hackathons): detail view with timeline and checklist
+- [ ] C19 feat(research): projects, daily log, and task inbox
+- [ ] C20 feat(research): papers, ideas, and experiments
+- [ ] C21 feat(research): weekly summary generator
+
+### Phase 4 — College
+- [ ] C22 feat(college): courses, attendance, and skip calculator
+- [ ] C23 feat(college): tasks for assignments, exams, and clubs
+- [ ] C24 feat(gcal): calendar sync read and write
+
+### Phase 5 — Glue
+- [ ] C25 feat(today): unified today screen
+- [ ] C26 feat(capture): quick capture palette and inbox
+- [ ] C27 feat(habits): simple habits with streaks
+- [ ] C28 feat(notes): evening review
+
+### Phase 6 — Polish and Ship
+- [ ] C29 feat(pwa): manifest, icons, offline shell
+- [ ] C30 feat(settings): profile, timezone, codeforces handle, data export
+- [ ] C31 test(e2e): smoke flows
+- [ ] C32 chore: a11y, performance, and empty-state pass
+- [ ] C33 docs: README, deploy guide, and handover
+
+## Decisions
+<!-- Agent: log every judgment call here. Format: Cxx · decision · why -->
+- Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
+- CP lists are imported from pasted problem lists or URLs (no scraping dependency); solved status verified through the Codeforces public API.
+- "Today's reading quota" is computed on read, not stored, so missed days redistribute automatically.
+
+## Blockers
+<!-- Agent: exact error, what was tried, what the user must do. -->
+- none
+
+## Backlog (discovered work, not in plan)
+- none
+
+## Lighthouse scores (C32)
+- Performance: –  Accessibility: –  PWA: –
+
+## Log
+<!-- newest at bottom -->
+
+## Handover (written in C33)
+<!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth, Vercel deploy) -->
