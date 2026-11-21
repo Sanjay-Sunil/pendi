@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F07**
+- Next commit: **F08**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -18,7 +18,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F04 feat(shell): tab scaffold with rail and bottom bar
 - [x] F05 feat(data): db interface, demo adapter, supabase adapter
 - [x] F06 feat(auth): google sign-in and auth gate
-- [ ] F07 feat(domain): date utilities with timezone tests
+- [x] F07 feat(domain): date utilities with timezone tests
 
 ### Phase 1 — Reading Planner
 - [ ] F08 feat(domain): reading quota planner
@@ -96,6 +96,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F04 · 19d4295 · StatefulShellRoute, 5 stub tabs, rail ≥600dp with wordmark; tests at 375/1280
 - 2026-11-21 · F05 · f2a1495 · Db interface; DemoDb mirrors SQL defaults/uniques/cascades; SupabaseDb; Result + validators
 - 2026-11-21 · F06 · 688c335 · google_sign_in 7 + signInWithIdToken w/ calendar scope; redirect tested; demo banner
+- 2026-11-21 · F07 · 58d71ca · dates.dart on timezone pkg; TS suite ported + weekStart/labels
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
