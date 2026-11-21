@@ -4,15 +4,15 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F01**
-- Gate status: not run yet (Flutter)
+- Next commit: **F02**
+- Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
 
 ## Checklist
 
 ### Phase 0 — Foundation
-- [ ] F01 chore: replace Next.js scaffold with Flutter app
+- [x] F01 chore: replace Next.js scaffold with Flutter app
 - [ ] F02 feat(ui): design tokens, fonts, theme mode
 - [ ] F03 feat(ui): core primitives
 - [ ] F04 feat(shell): tab scaffold with rail and bottom bar
@@ -88,6 +88,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 ## Log
 <!-- newest at bottom -->
 - 2026-11-21 · C01–C12 · c9ad12e · Next.js version (now on branch `nextjs-web`)
+- 2026-11-21 · F01 · b3adb9d · flutter create at root, strict lints, env.example.json, seeds/fixtures moved, gate script
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
