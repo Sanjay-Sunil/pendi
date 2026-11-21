@@ -6,6 +6,7 @@ import '../features/auth/screens/login_screen.dart';
 import '../features/college/screens/college_screen.dart';
 import '../features/cp/screens/cp_screen.dart';
 import '../features/dev/gallery_screen.dart';
+import '../features/hackathons/screens/hackathon_detail_screen.dart';
 import '../features/reading/screens/reading_screen.dart';
 import '../features/today/screens/today_screen.dart';
 import '../features/work/screens/work_screen.dart';
@@ -44,6 +45,10 @@ GoRouter buildRouter({
     GoRoute(path: '/', redirect: (_, _) => '/today'),
     GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
     GoRoute(path: '/dev/ui', builder: (_, _) => const GalleryScreen()),
+    GoRoute(
+      path: '/work/hackathon/:id',
+      builder: (_, s) => HackathonDetailScreen(id: s.pathParameters['id']!),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (_, _, shell) => AppShell(
         shell: shell,

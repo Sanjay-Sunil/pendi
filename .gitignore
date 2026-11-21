@@ -49,3 +49,4 @@ app.*.map.json
 
 # Local config (secrets)
 env.json
+/android/.kotlin/
