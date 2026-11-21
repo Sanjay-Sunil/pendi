@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F16**
+- Next commit: **F17**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -31,7 +31,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F13 feat(domain): cp daily picker and streak
 - [x] F14 feat(cp): list import and active list management
 - [x] F15 feat(integrations): codeforces solved-status sync
-- [ ] F16 feat(cp): cp screen with daily 2, streak, and review queue
+- [x] F16 feat(cp): cp screen with daily 2, streak, and review queue
 
 ### Phase 3 — Work Hub
 - [ ] F17 feat(hackathons): repository and list view
@@ -106,6 +106,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - 2026-11-21 · F13 · e147c80 · pickDaily (idempotent, review first), canonicalKey, generic streak + countByDay
 - 2026-11-21 · F14 · 4ccfd79 · parser for CF URLs/CSV/joined ids/JSON with per-line errors; CpRepo; lists UI (import/rename/activate); 20-problem bundled sample
 - 2026-11-21 · F15 · 27bf96c · hand-validated user.status parsing, 10-min cache, typed errors; ProfileRepo for handle; CpSync notifier; fixture tests
+- 2026-11-21 · F16 · 33c905b · persisted daily picks, solved/stuck/skip optimistic, notes, handle + sync button, streak flame, review queue; tests
 
 ## Handover (written in F33)
 <!-- What works · what is mocked · env vars to set · 3 manual steps (Supabase project, Google OAuth client IDs, release APK build) -->
