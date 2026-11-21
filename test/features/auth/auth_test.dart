@@ -37,7 +37,7 @@ void main() {
 
   testWidgets('demo mode opens Today directly with the banner', (tester) async {
     await pumpApp(tester);
-    expect(find.text('DAILY'), findsOneWidget);
+    expect(find.text('Good morning'), findsOneWidget);
     expect(find.textContaining('DEMO MODE'), findsOneWidget);
   });
 }

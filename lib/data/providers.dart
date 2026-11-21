@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/env.dart';
 import 'db.dart';
 import 'demo_db.dart';
+import 'repos/inbox_repo.dart';
 import 'seed.dart';
 import 'supabase_db.dart';
 
@@ -28,3 +29,11 @@ final dbProvider = FutureProvider<Db>((ref) async {
   }
   return SupabaseDb(Supabase.instance.client);
 });
+
+final inboxRepoProvider = FutureProvider<InboxRepo>(
+  (ref) async => InboxRepo(await ref.watch(dbProvider.future)),
+);
+
+final inboxProvider = FutureProvider<List<InboxItem>>(
+  (ref) async => (await ref.watch(inboxRepoProvider.future)).open(),
+);

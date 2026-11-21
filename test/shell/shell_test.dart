@@ -39,6 +39,6 @@ void main() {
 
   testWidgets('root redirects to today', (tester) async {
     await pumpApp(tester, location: '/');
-    expect(find.text('DAILY'), findsOneWidget);
+    expect(find.text('Good morning'), findsOneWidget);
   });
 }

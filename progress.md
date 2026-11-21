@@ -76,6 +76,8 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
   - Live-network tests opt-in only
 - F04 · wordmark shown as PNG (rendered from the SVG with rsvg-convert) · flutter_svg conflicts with xml ^7 needed by the extractor
 - F11 · link extraction runs on Android (no CORS); in the web build most sites block cross-origin fetches, so it falls back to adding the link as one page · web build is for checks only
+- F17/F25 · `work` and `today` are composition screens and may import other features' providers/widgets; all other features stay independent · they exist to combine modules
+- F24 · Calendar providers live in `lib/data/gcal_providers.dart` · shared by college and hackathons without cross-feature imports
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers

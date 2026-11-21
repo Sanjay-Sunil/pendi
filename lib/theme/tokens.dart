@@ -110,7 +110,7 @@ class PendiColors extends ThemeExtension<PendiColors> {
 abstract final class Tokens {
   static const radiusCard = 12.0;
   static const radiusControl = 8.0;
-  static const tapTarget = 44.0;
+  static const tapTarget = 48.0;
   static const pagePadPhone = 20.0;
   static const pagePadWide = 40.0;
   static const maxToday = 720.0;
