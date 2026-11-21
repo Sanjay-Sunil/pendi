@@ -162,13 +162,13 @@ surface2   #EFE4D4                 #1C1917
 border     #E0D2BD                 #292524
 text       #2A2118                 #EDE7DF
 muted      #6E5E4C                 #8F867B
-accent     #B45309                 #F59E0B
+accent     #A14A07                 #F59E0B
 accentFg   #FFFFFF                 #1A1203
 accentSoft #FDE9C7                 #2B2007
 success    #4D7C0F                 #84CC16
 danger     #B42318                 #F87171
 ```
-(Light `muted`/`accent` are slightly darker than the original web spec so text meets WCAG AA on cream.)
+(Light `muted`/`accent` are darker than the original web spec so text meets WCAG AA on cream.)
 - Expose tokens as a `ThemeExtension<PendiColors>`; build `ThemeData` for both modes from them. No raw hex in widgets.
 - Radius: card 12, control 8, pill 999. Borders: 1px `border`. No elevation/shadows anywhere (`elevation: 0`, no `Material` shadows).
 - Type: Geist (UI) and Geist Mono (labels, numbers, dates). Body 15/1.6. Section label 11 mono uppercase, letter-spacing 0.88 (0.08em), `muted`.

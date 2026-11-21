@@ -69,7 +69,8 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - Calendar and Codeforces sync run on app open and pull-to-refresh instead of server cron · no server code needed for a single-user app
 - Carried from the Next.js build (still valid):
   - `0001_init.sql` schema incl. `profiles.id`, `done_at` columns, `hackathon_milestones.gcal_event_id`, `daily_notes`; verified on Postgres with RLS isolation
-  - Light theme `muted` #6E5E4C and `accent` #B45309 for AA contrast on cream
+  - Light theme `muted` #6E5E4C for AA contrast on cream
+- F03 · light `accent` darkened again to #A14A07 · #B45309 measured 4.26:1 on cream in Flutter's contrast guideline test
   - Reading quota fixed at start of local day; carried-over = behind an even pace
   - Link extractor: HTML link order + titles first, sitemap-only pages appended; designed-to-scale is a hash-routed SPA so its 40 lessons are bundled; saadho seed = its 141 `/topics/*` pages
   - Live-network tests opt-in only

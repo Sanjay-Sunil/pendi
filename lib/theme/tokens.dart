@@ -36,7 +36,7 @@ class PendiColors extends ThemeExtension<PendiColors> {
     border: Color(0xFFE0D2BD),
     text: Color(0xFF2A2118),
     muted: Color(0xFF6E5E4C),
-    accent: Color(0xFFB45309),
+    accent: Color(0xFFA14A07),
     accentFg: Color(0xFFFFFFFF),
     accentSoft: Color(0xFFFDE9C7),
     success: Color(0xFF4D7C0F),
