@@ -91,7 +91,10 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - none
 
 ## Performance and accessibility (F32)
-- Today first frame (profile): –  Guideline tests: –
+- Guideline tests: pass — 48px tap targets, labelled tap targets, AA text contrast on Today, Reading, CP, Work (both tabs), College, Inbox, Settings, in dark and light (`test/a11y/`); no overflow at 375 and 1280.
+- Today in demo mode: first settle 1.5 s in the widget-test VM (includes seeding 181 pages + startup); one parallel `Future.wait` fetch, no waterfall.
+- Web release: main.dart.js 3.9 MB + 2 deferred parts (Settings, UI gallery).
+- Not measured: profile-mode first frame on a physical Android phone (no device/emulator here). Manual step: `flutter run --profile` and check the Today first frame in DevTools.
 
 ## Log
 <!-- newest at bottom -->

@@ -8,6 +8,7 @@ import '../../../theme/app_theme.dart';
 import '../../../theme/tokens.dart';
 import '../../../ui/app_checkbox.dart';
 import '../../../ui/date_field.dart';
+import '../../../ui/empty_state.dart';
 import '../../../ui/section_label.dart';
 import '../providers.dart';
 
@@ -93,6 +94,7 @@ class _TaskInboxState extends ConsumerState<TaskInbox> {
           ],
         ),
         const SizedBox(height: 8),
+        if (tasks.isEmpty) const EmptyState(message: 'No tasks from sir yet.'),
         for (final t in tasks)
           Row(
             children: [
