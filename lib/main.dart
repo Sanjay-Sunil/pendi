@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const PendiApp());
-}
+import 'app.dart';
+import 'theme/theme_mode_provider.dart';
 
-class PendiApp extends StatelessWidget {
-  const PendiApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Pendi',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('pendi'))),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  runApp(
+    ProviderScope(
+      overrides: [sharedPrefsProvider.overrideWithValue(prefs)],
+      child: const PendiApp(),
+    ),
+  );
 }
