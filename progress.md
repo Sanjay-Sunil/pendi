@@ -95,7 +95,11 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - Guideline tests: pass — 48px tap targets, labelled tap targets, AA text contrast on Today, Reading, CP, Work (both tabs), College, Inbox, Settings, in dark and light (`test/a11y/`); no overflow at 375 and 1280.
 - Today in demo mode: first settle 1.5 s in the widget-test VM (includes seeding 181 pages + startup); one parallel `Future.wait` fetch, no waterfall.
 - Web release: main.dart.js 3.9 MB + 2 deferred parts (Settings, UI gallery).
-- Not measured: profile-mode first frame on a physical Android phone (no device/emulator here). Manual step: `flutter run --profile` and check the Today first frame in DevTools.
+- On device (Samsung M52, Android 13, release APK, real Supabase in ap-south-1): first frame 0.6 s warm / 2.2 s cold; Today fully loaded from Supabase ~2.3–3.3 s (network-bound). The last saved Today is shown while it loads, and Calendar syncs in the background.
+
+## Device test (2026-11-22)
+Tested on a Samsung M52 against the real backend: Google sign-in, Calendar write + read-back, habits, capture, reading (live extraction found 361 pages), CP import/solve, hackathon template (4 Calendar events), research log autosave, export share sheet, restart persistence. Fixed: Google Sign-In not initialized after restart, Calendar errors swallowed, refresh not re-syncing Calendar, missing INTERNET permission, CP picks not refreshing after import / unstable order, page picker button buried under 361 rows, card semantics merged for screen readers.
+Test data left in your account: college task "Pendi calendar test", hackathon "HackNITC" (4 milestones → 4 Google Calendar events), list "Warmups", habit "Workout", reading source saadho (3 pages), research task + log entry.
 
 ## Log
 <!-- newest at bottom -->
