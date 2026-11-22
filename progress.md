@@ -90,6 +90,8 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - F31 · integration tests run in Chrome via `flutter drive` + chromedriver (no Android emulator installed) · `tool/e2e.sh`
 - 2026-11-21 · Supabase project `pendi` (ref nqnwlspndyutndhtdxwy, ap-south-1, org Sanjay-Sunil) created with the CLI; 0001 pushed; 22/22 tables RLS-on; `env.json` and `supabase/.db-password` written locally and git-ignored
 - 2026-11-22 · College data comes from IIIT Kottayam portals via Pendi's own client (option A), credentials only in on-device secure storage · works without a laptop; no third-party server; AGPL code not copied
+- F38 · inferred timetable cached on the device (SharedPreferences), not in Supabase · derived data rebuilt on every sync; no new table needed (plan said migration 0002, now unnecessary; 0002 was used for external ids)
+- F38 · a slot counts after 2+ occurrences in the last 5 weeks; 2-hour slots are labs · one-off extra classes don't become permanent
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers

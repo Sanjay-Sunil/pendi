@@ -20,18 +20,19 @@ Future<void> pumpApp(
   String theme = 'dark',
   List<Override>? overrides,
   AuthRepo? auth,
+  Map<String, Object> prefs = const {},
 }) async {
   tester.view.physicalSize = Size(width, height);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
   final repo = auth ?? DemoAuthRepo();
-  final prefs = await testPrefs({'theme_mode': theme});
+  final storedPrefs = await testPrefs({'theme_mode': theme, ...prefs});
   await tester.pumpWidget(
     ProviderScope(
       // No automatic retries in tests: failures should surface immediately.
       retry: (_, _) => null,
       overrides: [
-        sharedPrefsProvider.overrideWithValue(prefs),
+        sharedPrefsProvider.overrideWithValue(storedPrefs),
         authRepoProvider.overrideWithValue(repo),
         routerProvider.overrideWithValue(
           buildRouter(

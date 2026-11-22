@@ -6,6 +6,7 @@ import '../../college_portal/providers.dart';
 import '../providers.dart';
 import '../widgets/courses_section.dart';
 import '../widgets/tasks_section.dart';
+import '../widgets/timetable_section.dart';
 
 class CollegeScreen extends ConsumerWidget {
   const CollegeScreen({super.key});
@@ -23,7 +24,12 @@ class CollegeScreen extends ConsumerWidget {
         ref.invalidate(coursesProvider);
         ref.invalidate(collegeTasksProvider);
       },
-      children: const [TasksSection(), SizedBox(height: 32), CoursesSection()],
+      children: const [
+        TimetableSection(),
+        TasksSection(),
+        SizedBox(height: 32),
+        CoursesSection(),
+      ],
     );
   }
 }

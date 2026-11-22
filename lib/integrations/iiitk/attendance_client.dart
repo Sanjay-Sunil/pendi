@@ -241,6 +241,28 @@ class AttendanceClient {
     _access = token;
   }
 
+  /// All sessions recorded for one course this term.
+  Future<List<PortalSession>> sessions(PortalCourse course) async {
+    final r = await _send(
+      'GET',
+      '/api/students/me/courses/${Uri.encodeComponent(course.id)}/sessions',
+    );
+    final list = r is Map<String, Object?> ? r['sessions'] : null;
+    if (list is! List<Object?>) return const [];
+    return [
+      for (final s in list.whereType<Map<String, Object?>>())
+        if (_s(s, ['date']).length >= 10)
+          PortalSession(
+            date: _s(s, ['date']).substring(0, 10),
+            startTime: _s(s, ['startTime']),
+            endTime: _s(s, ['endTime']),
+            status: _s(s, ['status']).toUpperCase(),
+            courseCode: course.code,
+            courseName: course.name,
+          ),
+    ];
+  }
+
   Future<AttendanceSummary> attendance() async => parseAttendance(
     await _send('GET', '/api/students/me/attendance'),
     _now(),

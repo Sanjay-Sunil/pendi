@@ -1,10 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/college.dart';
+import '../../domain/dates.dart';
+import '../../domain/timetable.dart';
 import '../../integrations/iiitk/attendance_client.dart';
 import '../../integrations/iiitk/credentials.dart';
 import '../../integrations/iiitk/moodle_client.dart';
 import '../college/providers.dart';
+import 'timetable_store.dart';
 
 final credentialStoreProvider = Provider<CredentialStore>(
   (ref) => const SecureCredentialStore(),
@@ -107,6 +110,28 @@ final portalSyncProvider = FutureProvider<DateTime?>((ref) async {
       (code: c.code, name: c.name, present: c.present, total: c.total),
   ]);
   ref.invalidate(coursesProvider);
+  // Timetable from each course's sessions; a failure here keeps the old one.
+  try {
+    final client = ref.read(attendanceClientProvider);
+    final perCourse = await Future.wait(summary.courses.map(client.sessions));
+    final slots = inferTimetable([
+      for (final list in perCourse)
+        for (final x in list)
+          (
+            date: x.date,
+            start: x.startTime,
+            end: x.endTime,
+            courseCode: x.courseCode,
+            courseName: x.courseName,
+          ),
+    ], todayLocal(summary.fetchedAt));
+    if (slots.isNotEmpty) {
+      await ref.read(timetableStoreProvider).save(slots);
+      ref.invalidate(timetableProvider);
+    }
+  } on PortalError {
+    // Attendance still synced; timetable stays as last saved.
+  }
   return summary.fetchedAt;
 });
 

@@ -17,6 +17,7 @@ import '../../../ui/section_card.dart';
 import '../../../ui/section_label.dart';
 import '../../../ui/streak_flame.dart';
 import '../../college/providers.dart';
+import '../../college/widgets/timetable_section.dart';
 import '../../cp/providers.dart';
 import '../../habits/habits_section.dart';
 import '../../habits/providers.dart';
@@ -147,6 +148,7 @@ class TodayScreen extends ConsumerWidget {
                   icon: LucideIcons.calendar,
                   trailing: count(d.events.length),
                   children: [
+                    const NowNextClass(),
                     CalendarStrip(events: d.events),
                     if (d.calendarError case final err?)
                       Padding(
