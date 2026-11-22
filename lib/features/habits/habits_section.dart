@@ -13,6 +13,7 @@ import '../../ui/app_sheet.dart';
 import '../../ui/empty_state.dart';
 import '../../ui/section_label.dart';
 import '../../ui/streak_flame.dart';
+import '../../ui/streak_heatmap.dart';
 import 'providers.dart';
 
 class HabitsSection extends ConsumerWidget {
@@ -159,10 +160,15 @@ class _ManageHabitsState extends ConsumerState<_ManageHabits> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final h in habits)
+        for (final h in habits) ...[
           Row(
             children: [
-              Expanded(child: Text(h.habit.name)),
+              Expanded(
+                child: Text(
+                  h.habit.name,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
               IconButton(
                 tooltip: 'Delete ${h.habit.name}',
                 icon: Icon(
@@ -178,6 +184,12 @@ class _ManageHabitsState extends ConsumerState<_ManageHabits> {
               ),
             ],
           ),
+          StreakHeatmap(
+            counts: {for (final d in h.days) d: 1},
+            today: todayLocal(ref.watch(clockProvider)()),
+          ),
+          const SizedBox(height: 20),
+        ],
         AppInput(
           label: 'New habit',
           controller: _name,

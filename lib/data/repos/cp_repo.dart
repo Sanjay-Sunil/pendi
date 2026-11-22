@@ -127,6 +127,11 @@ class CpRepo {
     return [for (final id in ids) all.firstWhere((p) => p.id == id)];
   }
 
+  /// Problems solved per local day, for the activity heatmap.
+  Future<Map<LocalDay, int>> solvesByDay() async => countByDay(
+    (await problems()).map((p) => p.solvedAt).whereType<DateTime>(),
+  );
+
   /// Days in a row with at least [threshold] solves, ending today or yesterday.
   Future<int> streakAsOf(LocalDay today, {int threshold = 1}) async {
     final solved = (await problems())

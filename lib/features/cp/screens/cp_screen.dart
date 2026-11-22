@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../../../data/providers.dart';
+import '../../../domain/dates.dart';
 import '../../../theme/tokens.dart';
 import '../../../ui/app_button.dart';
 import '../../../ui/app_input.dart';
@@ -9,6 +11,7 @@ import '../../../ui/empty_state.dart';
 import '../../../ui/page_scaffold.dart';
 import '../../../ui/section_label.dart';
 import '../../../ui/streak_flame.dart';
+import '../../../ui/streak_heatmap.dart';
 import '../providers.dart';
 import '../widgets/lists_section.dart';
 import '../widgets/problem_card.dart';
@@ -100,6 +103,14 @@ class _CpScreenState extends ConsumerState<CpScreen> {
               variant: ButtonVariant.secondary,
               onPressed: syncing ? null : _sync,
             ),
+          const SizedBox(height: 24),
+          const SectionLabel('Activity'),
+          const SizedBox(height: 8),
+          StreakHeatmap(
+            counts: data.solvesByDay,
+            today: todayLocal(ref.watch(clockProvider)()),
+            unit: 'solved',
+          ),
           if (data.review.isNotEmpty) ...[
             const SizedBox(height: 24),
             SectionLabel('Review queue · ${data.review.length}'),

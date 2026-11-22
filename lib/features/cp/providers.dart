@@ -78,23 +78,26 @@ class CpToday {
     required this.review,
     required this.handle,
     required this.hasList,
+    this.solvesByDay = const {},
   });
   final List<CpProblem> problems;
   final int streak;
   final List<CpProblem> review;
   final String? handle;
   final bool hasList;
+  final Map<String, int> solvesByDay;
 }
 
 final cpTodayProvider = FutureProvider<CpToday>((ref) async {
   final repo = await ref.watch(cpRepoProvider.future);
   final today = todayLocal(ref.watch(clockProvider)());
   final profile = await (await ref.watch(profileRepoProvider.future)).get();
-  final (daily, streak, review, active) = await (
+  final (daily, streak, review, active, solves) = await (
     repo.daily(today),
     repo.streakAsOf(today),
     repo.reviewQueue(),
     repo.activeList(),
+    repo.solvesByDay(),
   ).wait;
   return CpToday(
     problems: daily,
@@ -102,5 +105,6 @@ final cpTodayProvider = FutureProvider<CpToday>((ref) async {
     review: review,
     handle: profile.cfHandle,
     hasList: active != null,
+    solvesByDay: solves,
   );
 });
