@@ -1,0 +1,14 @@
+{
+  "overall": [{"status": "PRESENT", "count": 58}, {"status": "ABSENT", "count": 9}],
+  "byCourse": [
+    {"courseId": "c1", "courseCode": "CS311", "courseName": "Operating Systems", "present": 33, "total": 40, "percentage": 82.5, "dlCredited": 1, "dlOverflow": 0},
+    {"courseId": "c2", "courseCode": "CS312", "courseName": "Computer Networks", "present": 25, "total": 27, "percentage": 92.6, "dlCredited": 0, "dlOverflow": 0},
+    {"courseId": "c3", "code": "MA301", "name": "Probability", "present": "0", "total": "0"},
+    {"courseId": "x", "courseName": "No code, ignored", "present": 1, "total": 1}
+  ],
+  "recent": [
+    {"date": "2026-11-20T00:00:00.000Z", "startTime": "09:00", "endTime": "10:00", "status": "present", "course": {"code": "CS311", "name": "Operating Systems"}},
+    {"date": "2026-11-20", "startTime": "14:00", "endTime": "16:00", "status": "ABSENT", "course": {"code": "CS312", "name": "Computer Networks"}},
+    {"date": "bad", "course": {"code": "CS311"}}
+  ]
+}

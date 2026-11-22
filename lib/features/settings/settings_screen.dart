@@ -17,6 +17,7 @@ import '../../ui/app_input.dart';
 import '../../ui/page_scaffold.dart';
 import '../../ui/section_label.dart';
 import '../auth/providers.dart';
+import '../college_portal/college_account_card.dart';
 
 final _profileRepoProvider = FutureProvider<ProfileRepo>(
   (ref) async => ProfileRepo(await ref.watch(dbProvider.future)),
@@ -151,6 +152,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 24),
+          const SectionLabel('College account'),
+          const SizedBox(height: 8),
+          const CollegeAccountCard(),
           const SizedBox(height: 24),
           const SectionLabel('Data'),
           const SizedBox(height: 8),
