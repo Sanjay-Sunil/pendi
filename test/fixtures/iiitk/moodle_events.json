@@ -1,0 +1,5 @@
+[{"error":false,"data":{"events":[
+ {"id":901,"name":"Lab 4 is due","timesort":1764163800,"modulename":"assign","course":{"fullname":"Operating Systems","shortname":"CS311"},"url":"https://lmsug25.iiitkottayam.ac.in/mod/assign/view.php?id=55"},
+ {"id":902,"name":"Quiz 2 closes","timesort":1764336600,"modulename":"quiz","course":{"fullname":"Computer Networks","shortname":"CS312"}},
+ {"id":"bad","name":"skipped"}
+]}}]

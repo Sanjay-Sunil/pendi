@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/misc.dart';
 import 'package:pendi/data/demo_db.dart';
 import 'package:pendi/data/providers.dart';
 import 'package:pendi/data/seed.dart';
+import 'package:pendi/features/college_portal/providers.dart';
 import 'package:pendi/features/reading/providers.dart';
+import 'package:pendi/integrations/iiitk/credentials.dart';
 import 'package:pendi/integrations/sitemap.dart';
 
 /// Reads seed assets straight from disk in tests.
@@ -24,10 +26,22 @@ class FakeExtractor implements PageExtractor {
 }
 
 /// Standard overrides: fixed clock (21 Nov 2026, 09:30 IST), disk assets, fake extractor.
-List<Override> testOverrides({DateTime? now, PageExtractor? extractor}) => [
+List<Override> testOverrides({
+  DateTime? now,
+  PageExtractor? extractor,
+  CredentialStore? portalLogin,
+  CredentialStore? lmsLogin,
+}) => [
   clockProvider.overrideWithValue(() => now ?? DateTime.utc(2026, 11, 21, 4)),
   assetLoaderProvider.overrideWithValue(diskAssets),
   pageExtractorProvider.overrideWithValue(extractor ?? FakeExtractor(const [])),
+  // Tests never touch the real Android Keystore.
+  credentialStoreProvider.overrideWithValue(
+    portalLogin ?? MemoryCredentialStore(),
+  ),
+  lmsCredentialStoreProvider.overrideWithValue(
+    lmsLogin ?? MemoryCredentialStore(),
+  ),
 ];
 
 /// A demo database seeded exactly like the app's demo mode.

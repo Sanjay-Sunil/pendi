@@ -88,6 +88,7 @@ const columnDefaults = <String, Map<String, Object?>>{
     'done': false,
     'done_at': null, //
     'gcal_event_id': null,
+    'external_id': null,
   },
   'gcal_events_cache': {'ends_at': null, 'all_day': false},
   'inbox': {'resolved': false},

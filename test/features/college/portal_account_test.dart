@@ -34,8 +34,7 @@ Future<void> openSettings(
     location: '/settings',
     height: 2200,
     overrides: [
-      ...testOverrides(),
-      credentialStoreProvider.overrideWithValue(store),
+      ...testOverrides(portalLogin: store),
       attendanceClientProvider.overrideWithValue(client),
     ],
   );
@@ -52,7 +51,7 @@ void main() {
       'me@iiitkottayam.ac.in',
     );
     await tester.enterText(
-      find.widgetWithText(TextField, 'Password'),
+      find.widgetWithText(TextField, 'Password').first,
       'secret',
     );
     await tester.ensureVisible(find.text('Connect'));
@@ -70,7 +69,10 @@ void main() {
       find.widgetWithText(TextField, 'name@iiitkottayam.ac.in'),
       'me@iiitkottayam.ac.in',
     );
-    await tester.enterText(find.widgetWithText(TextField, 'Password'), 'nope');
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Password').first,
+      'nope',
+    );
     await tester.ensureVisible(find.text('Connect'));
     await tester.tap(find.text('Connect'));
     await tester.pumpAndSettle();

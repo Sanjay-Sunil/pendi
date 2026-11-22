@@ -40,6 +40,7 @@ class CollegeTask {
     this.dueAt,
     this.doneAt,
     this.gcalEventId,
+    this.externalId,
   });
 
   factory CollegeTask.fromJson(Row r) => CollegeTask(
@@ -51,6 +52,7 @@ class CollegeTask {
     dueAt: r.time('due_at'),
     doneAt: r.time('done_at'),
     gcalEventId: r.strOrNull('gcal_event_id'),
+    externalId: r.strOrNull('external_id'),
   );
 
   final String id;
@@ -61,4 +63,7 @@ class CollegeTask {
   final DateTime? dueAt;
   final DateTime? doneAt;
   final String? gcalEventId;
+
+  /// Source id for imported tasks, e.g. `moodle:1234`.
+  final String? externalId;
 }

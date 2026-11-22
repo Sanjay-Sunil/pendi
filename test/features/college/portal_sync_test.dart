@@ -57,9 +57,8 @@ void main() {
       location: '/college',
       height: 2400,
       overrides: [
-        ...testOverrides(),
+        ...testOverrides(portalLogin: store),
         dbProvider.overrideWith((ref) async => db),
-        credentialStoreProvider.overrideWithValue(store),
         attendanceClientProvider.overrideWithValue(
           AttendanceClient(
             now: () => DateTime.utc(2026, 11, 22, 4),

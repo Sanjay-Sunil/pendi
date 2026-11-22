@@ -12,11 +12,14 @@ class CollegeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Kick off a Moodle sync once per app start when an account is connected.
+    ref.watch(lmsSyncProvider);
     return PageScaffold(
       title: 'College',
       label: 'Classes · Tasks',
       onRefresh: () async {
         ref.invalidate(portalSyncProvider);
+        ref.invalidate(lmsSyncProvider);
         ref.invalidate(coursesProvider);
         ref.invalidate(collegeTasksProvider);
       },

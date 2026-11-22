@@ -160,4 +160,46 @@ class CollegeRepo {
     }
     return (added: added, updated: updated);
   });
+
+  /// Upserts Moodle deadlines as college tasks keyed by `moodle:<event id>`.
+  /// New dated tasks are mirrored to Calendar via [onTaskDated].
+  Future<Result<({int added, int updated})>> syncDeadlines(
+    List<({String externalId, String title, CollegeKind kind, DateTime dueAt})>
+    items,
+  ) => Result.guard(() async {
+    final byExternal = {
+      for (final t in (await _db.list(
+        'college_tasks',
+      )).map(CollegeTask.fromJson))
+        if (t.externalId != null) t.externalId!: t,
+    };
+    var added = 0, updated = 0;
+    for (final i in items) {
+      final t = byExternal[i.externalId];
+      if (t == null) {
+        final created = CollegeTask.fromJson(
+          (await _db.insert('college_tasks', [
+            {
+              'title': i.title,
+              'kind': i.kind.name,
+              'due_at': isoOrNull(i.dueAt),
+              'external_id': i.externalId,
+            },
+          ])).single,
+        );
+        await onTaskDated?.call(created);
+        added++;
+      } else if (t.title != i.title || t.dueAt != i.dueAt) {
+        final changed = CollegeTask.fromJson(
+          await _db.update('college_tasks', t.id, {
+            'title': i.title,
+            'due_at': isoOrNull(i.dueAt),
+          }),
+        );
+        await onTaskDated?.call(changed);
+        updated++;
+      }
+    }
+    return (added: added, updated: updated);
+  });
 }
