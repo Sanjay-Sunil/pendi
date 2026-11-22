@@ -49,3 +49,33 @@ class OfflineToday extends StatelessWidget {
     );
   }
 }
+
+/// The cached Today shown during a normal load, with a quiet "Updating" note.
+class CachedToday extends StatelessWidget {
+  const CachedToday({super.key, required this.snapshot});
+
+  final TodaySnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const LinearProgressIndicator(minHeight: 2),
+        const SizedBox(height: 4),
+        Text('Updating…', style: TextStyle(color: c.muted, fontSize: 12)),
+        for (final (label, lines) in snapshot.sections)
+          if (lines.isNotEmpty) ...[
+            const SizedBox(height: 24),
+            SectionLabel(label),
+            for (final l in lines)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Text(l),
+              ),
+          ],
+      ],
+    );
+  }
+}

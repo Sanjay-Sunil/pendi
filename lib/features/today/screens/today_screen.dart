@@ -71,7 +71,12 @@ class TodayScreen extends ConsumerWidget {
         await ref.read(todayProvider.future);
       },
       children: [
-        if (d == null && today.isLoading) const LinearProgressIndicator(),
+        // While loading, show the last Today we saw so opening feels instant.
+        if (d == null && today.isLoading)
+          if (ref.read(todayCacheProvider).load() case final cached?)
+            CachedToday(snapshot: cached)
+          else
+            const LinearProgressIndicator(),
         if (today.hasError && d == null)
           OfflineToday(snapshot: ref.read(todayCacheProvider).load()),
         if (d != null) ...[
@@ -87,6 +92,14 @@ class TodayScreen extends ConsumerWidget {
           const SectionLabel('Calendar'),
           const SizedBox(height: 8),
           CalendarStrip(events: d.events),
+          if (d.calendarError case final err?)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                "Couldn't sync Google Calendar: $err",
+                style: TextStyle(color: context.colors.muted, fontSize: 13),
+              ),
+            ),
           gap(),
           SectionLabel(
             'Reading · ${d.reading.fold<int>(0, (n, o) => n + o.plan.items.length)} pages',

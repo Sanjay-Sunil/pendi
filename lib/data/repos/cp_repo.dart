@@ -110,10 +110,14 @@ class CpRepo {
     final list = await activeList();
     if (list == null) return [];
     final all = await problems(listId: list.id);
-    final existing = (await _db.list('cp_daily', where: {'day': day}))
-        .map((r) => r.str('problem_id'))
-        .where((id) => all.any((p) => p.id == id))
-        .toList();
+    final position = {for (final p in all) p.id: p.position};
+    // Rows come back in no fixed order from Postgres; keep list order stable.
+    final existing =
+        (await _db.list('cp_daily', where: {'day': day}))
+            .map((r) => r.str('problem_id'))
+            .where(position.containsKey)
+            .toList()
+          ..sort((a, b) => position[a]!.compareTo(position[b]!));
     final ids = pickDaily(all, existing, count: count);
     if (existing.isEmpty && ids.isNotEmpty) {
       await _db.insert('cp_daily', [

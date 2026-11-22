@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../core/env.dart';
+import '../../integrations/google_auth.dart';
 
 const calendarScope = 'https://www.googleapis.com/auth/calendar';
 
@@ -31,20 +31,7 @@ class GoogleSupabaseAuthRepo implements AuthRepo {
   GoogleSupabaseAuthRepo(this._supabase);
 
   final SupabaseClient _supabase;
-  bool _initialized = false;
-
-  Future<GoogleSignIn> _google() async {
-    final g = GoogleSignIn.instance;
-    if (!_initialized) {
-      await g.initialize(
-        serverClientId: Env.googleWebClientId.isEmpty
-            ? null
-            : Env.googleWebClientId,
-      );
-      _initialized = true;
-    }
-    return g;
-  }
+  Future<GoogleSignIn> _google() => googleSignIn();
 
   @override
   bool get isSignedIn => _supabase.auth.currentSession != null;

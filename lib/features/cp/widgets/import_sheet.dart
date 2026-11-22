@@ -36,7 +36,10 @@ class _ImportListFormState extends ConsumerState<ImportListForm> {
     );
     if (!mounted) return;
     if (!res.isOk) return setState(() => _error = res.errorOrNull);
-    ref.invalidate(cpListsProvider);
+    ref
+      ..invalidate(cpListsProvider)
+      // A first import becomes the active list, so today's picks change too.
+      ..invalidate(cpTodayProvider);
     final messenger = ScaffoldMessenger.of(context);
     Navigator.of(context).pop();
     messenger.showSnackBar(

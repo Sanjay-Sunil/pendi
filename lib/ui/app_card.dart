@@ -18,6 +18,7 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final radius = BorderRadius.circular(Tokens.radiusCard);
+    final content = Padding(padding: EdgeInsets.all(padding), child: child);
     return Material(
       color: c.surface,
       shape: RoundedRectangleBorder(
@@ -25,10 +26,9 @@ class AppCard extends StatelessWidget {
         side: BorderSide(color: c.border),
       ),
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(padding: EdgeInsets.all(padding), child: child),
-      ),
+      // Only tappable cards get an InkWell; otherwise it would merge the card's
+      // controls into one node for screen readers.
+      child: onTap == null ? content : InkWell(onTap: onTap, child: content),
     );
   }
 }

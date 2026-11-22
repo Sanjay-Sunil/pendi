@@ -14,6 +14,8 @@ class PickablePage {
 }
 
 /// Checklist of extracted pages with select-all and up/down reordering.
+const _rowHeight = 57.0;
+
 class PagePicker extends StatelessWidget {
   const PagePicker({super.key, required this.pages, required this.onChanged});
 
@@ -43,45 +45,49 @@ class PagePicker extends StatelessWidget {
           label: 'Select all ($selected/${pages.length})',
           onChanged: (_) => onChanged([for (final p in pages) p.toggled(!all)]),
         ),
+        // Own scroll area so the sheet's submit button stays visible, built
+        // lazily because index pages can list hundreds of links.
         DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(color: c.border),
             borderRadius: BorderRadius.circular(Tokens.radiusControl),
           ),
-          child: Column(
-            children: [
-              for (var i = 0; i < pages.length; i++) ...[
-                if (i > 0) Divider(height: 1, color: c.border),
-                Row(
-                  children: [
-                    Expanded(
-                      child: AppCheckbox(
-                        value: pages[i].selected,
-                        label: pages[i].title,
-                        onChanged: (_) => onChanged([
-                          for (var k = 0; k < pages.length; k++)
-                            k == i ? pages[k].toggled() : pages[k],
-                        ]),
-                      ),
+          child: SizedBox(
+            height: (pages.length * _rowHeight).clamp(
+              _rowHeight,
+              MediaQuery.sizeOf(context).height * 0.4,
+            ),
+            child: ListView.separated(
+              key: const Key('page-list'),
+              itemCount: pages.length,
+              separatorBuilder: (_, _) => Divider(height: 1, color: c.border),
+              itemBuilder: (context, i) => Row(
+                children: [
+                  Expanded(
+                    child: AppCheckbox(
+                      value: pages[i].selected,
+                      label: pages[i].title,
+                      onChanged: (_) => onChanged([
+                        for (var k = 0; k < pages.length; k++)
+                          k == i ? pages[k].toggled() : pages[k],
+                      ]),
                     ),
-                    IconButton(
-                      tooltip: 'Move ${pages[i].title} up',
-                      icon: const Icon(LucideIcons.arrowUp, size: 16),
-                      color: c.muted,
-                      onPressed: i == 0 ? null : () => _move(i, -1),
-                    ),
-                    IconButton(
-                      tooltip: 'Move ${pages[i].title} down',
-                      icon: const Icon(LucideIcons.arrowDown, size: 16),
-                      color: c.muted,
-                      onPressed: i == pages.length - 1
-                          ? null
-                          : () => _move(i, 1),
-                    ),
-                  ],
-                ),
-              ],
-            ],
+                  ),
+                  IconButton(
+                    tooltip: 'Move ${pages[i].title} up',
+                    icon: const Icon(LucideIcons.arrowUp, size: 16),
+                    color: c.muted,
+                    onPressed: i == 0 ? null : () => _move(i, -1),
+                  ),
+                  IconButton(
+                    tooltip: 'Move ${pages[i].title} down',
+                    icon: const Icon(LucideIcons.arrowDown, size: 16),
+                    color: c.muted,
+                    onPressed: i == pages.length - 1 ? null : () => _move(i, 1),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],

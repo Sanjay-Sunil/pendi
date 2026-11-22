@@ -66,4 +66,25 @@ void main() {
     await pumpApp(tester, location: '/cp', overrides: testOverrides());
     await expectAccessible(tester);
   });
+
+  test('saved daily picks come back in list order', () async {
+    final db = DemoDb();
+    final repo = CpRepo(db);
+    await repo.createList('L', parseProblemList('4A\n71A\n231A').problems);
+    final picks = await repo.daily('2026-03-01');
+    // Simulate Postgres returning rows reversed.
+    final rows = await db.list('cp_daily');
+    for (final r in rows) {
+      await db.remove('cp_daily', r['id']! as String);
+    }
+    for (final r in rows.reversed) {
+      await db.insert('cp_daily', [
+        {'day': r['day'], 'problem_id': r['problem_id']},
+      ]);
+    }
+    expect(
+      (await repo.daily('2026-03-01')).map((p) => p.key),
+      picks.map((p) => p.key),
+    );
+  });
 }

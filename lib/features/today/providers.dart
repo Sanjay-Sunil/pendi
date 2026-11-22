@@ -35,6 +35,7 @@ class TodayData {
     required this.work,
     required this.college,
     required this.inboxCount,
+    this.calendarError,
   });
   final LocalDay day;
   final List<CachedEvent> events;
@@ -43,6 +44,7 @@ class TodayData {
   final List<WorkItem> work;
   final List<CollegeTask> college;
   final int inboxCount;
+  final String? calendarError;
 }
 
 /// Top [limit] open work items due by end of today (overdue first).
@@ -65,9 +67,9 @@ final todayProvider = FutureProvider<TodayData>((ref) async {
   final (events, reading, cp, hacks, research, college, inbox) = await (
     ref
         .watch(todayEventsProvider.future)
-        .then<List<CachedEvent>>(
+        .then<CalendarDay>(
           (e) => e,
-          onError: (Object _) => const <CachedEvent>[],
+          onError: (Object e) => CalendarDay(const [], e.toString()),
         ),
     ref.watch(readingOverviewProvider.future),
     ref.watch(cpTodayProvider.future),
@@ -115,7 +117,8 @@ final todayProvider = FutureProvider<TodayData>((ref) async {
   final soon = startOfDay(addDays(day, 8));
   final data = TodayData(
     day: day,
-    events: events,
+    events: events.events,
+    calendarError: events.error,
     reading: reading,
     cp: cp,
     work: work,
@@ -130,6 +133,7 @@ final todayProvider = FutureProvider<TodayData>((ref) async {
 });
 
 void invalidateToday(WidgetRef ref) {
+  forceCalendarSync();
   ref
     ..invalidate(readingOverviewProvider)
     ..invalidate(cpTodayProvider)
@@ -138,5 +142,7 @@ void invalidateToday(WidgetRef ref) {
     ..invalidate(collegeTasksProvider)
     ..invalidate(inboxProvider)
     ..invalidate(habitsProvider)
+    // Pull-to-refresh also re-syncs Google Calendar.
+    ..invalidate(todayEventsProvider)
     ..invalidate(todayProvider);
 }
