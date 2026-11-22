@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **DONE**
+- Next commit: **F34**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -58,6 +58,13 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F32 chore: a11y, performance, and empty-state pass
 - [x] F33 docs: README, setup guide, and handover
 
+### Phase 7 — Polish and IIIT Kottayam portals
+- [ ] F34 style: today and shell polish
+- [ ] F35 feat(portals): secure college credentials and attendance client
+- [ ] F36 feat(college): sync attendance into courses (80% rule)
+- [ ] F37 feat(portals): moodle deadlines into college tasks
+- [ ] F38 feat(college): timetable from attendance sessions
+
 ## Decisions
 <!-- Agent: log every judgment call here. Format: Fxx · decision · why -->
 - Seed reading sources: designed-to-scale.vercel.app and saadho.arushk.tech, 30 days each.
@@ -82,6 +89,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - F31 · `r:` captures default to due 23:59 today so they show on Today · capture means "do today"; editable later
 - F31 · integration tests run in Chrome via `flutter drive` + chromedriver (no Android emulator installed) · `tool/e2e.sh`
 - 2026-11-21 · Supabase project `pendi` (ref nqnwlspndyutndhtdxwy, ap-south-1, org Sanjay-Sunil) created with the CLI; 0001 pushed; 22/22 tables RLS-on; `env.json` and `supabase/.db-password` written locally and git-ignored
+- 2026-11-22 · College data comes from IIIT Kottayam portals via Pendi's own client (option A), credentials only in on-device secure storage · works without a laptop; no third-party server; AGPL code not copied
 - Brand: Geist SemiBold "pendi" wordmark with an amber i-dot; icon = "p" + amber dot (`assets/brand/`, generator `tool/make_logo.py`)
 
 ## Blockers

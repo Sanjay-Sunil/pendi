@@ -160,5 +160,30 @@ Carried over from the earlier Next.js build (kept on branch `nextjs-web`, reuse 
 - Done when: a fresh clone runs in demo mode with only `flutter pub get && flutter run`.
 
 ---
+## Phase 7 — Polish and IIIT Kottayam portals (added 2026-11-22)
+
+Pendi talks to the college portals itself from the phone (option A). Own Dart code written against the portals' public endpoints; no Bunkialo (AGPL) source is copied. Credentials live only on the device (Android Keystore via `flutter_secure_storage`), never in Supabase.
+
+### F34 `style: today and shell polish`
+- Scope: Today day-progress header, sections grouped in quiet cards with counts, equal-height calendar cards with time ranges, gentle fade-in, tabular mono numbers, nicer empty states and login screen.
+- Done when: guideline tests still pass; screenshots reviewed on device in both themes.
+
+### F35 `feat(portals): secure college credentials and attendance client`
+- Scope: `lib/integrations/iiitk/attendance.dart`: login (`/api/auth/login` → bearer + refresh), `/api/students/me/attendance` (overall + byCourse: code, name, present, total, duty-leave credit). Typed errors, 15s timeouts, tolerant parsing with fixture tests. Settings → "College account" to sign in / out (secure storage).
+- Done when: fixture tests pass; on device, a real login lists your courses.
+
+### F36 `feat(college): sync attendance into courses (80% rule)`
+- Scope: upsert courses by code with attended/total from the portal; default minimum 80% for IIITK; `canSkip` uses it; "Synced 5 min ago" + pull-to-refresh; manual courses still allowed.
+- Done when: counts match the portal on device; skip advice correct at the 80% line.
+
+### F37 `feat(portals): moodle deadlines into college tasks`
+- Scope: `lib/integrations/iiitk/moodle.dart`: form login (logintoken), sesskey, `core_calendar_get_action_events_by_timesort` for upcoming assignments/quizzes → `college_tasks` (kind assignment/exam), deduped by Moodle event id, mirrored to Google Calendar.
+- Done when: upcoming Moodle deadlines appear in College and on Today, no duplicates after repeated syncs.
+
+### F38 `feat(college): timetable from attendance sessions`
+- Scope: infer weekly slots (day, start–end, course) from attendance session records; additive migration `0002_timetable.sql`; "Now / Next class" on Today and a week view in College.
+- Done when: inferred timetable matches your real week on device.
+
+---
 ## After v1 (do NOT build unless all above are `[x]`)
 Attendance reminders, local notifications, home-screen widget, expense split, Pomodoro timer, weekly stats page, background Calendar/Codeforces sync. Add to the Backlog in `progress.md` only.
