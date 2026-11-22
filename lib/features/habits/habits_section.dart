@@ -11,7 +11,7 @@ import '../../ui/app_checkbox.dart';
 import '../../ui/app_input.dart';
 import '../../ui/app_sheet.dart';
 import '../../ui/empty_state.dart';
-import '../../ui/section_label.dart';
+import '../../ui/section_card.dart';
 import '../../ui/streak_flame.dart';
 import '../../ui/streak_heatmap.dart';
 import 'providers.dart';
@@ -29,20 +29,16 @@ class HabitsSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final today = todayLocal(ref.watch(clockProvider)());
     final habits = ref.watch(habitsProvider).value ?? const [];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SectionCard(
+      label: 'Habits',
+      icon: LucideIcons.repeat,
+      trailing: AppButton(
+        label: 'Manage',
+        small: true,
+        variant: ButtonVariant.ghost,
+        onPressed: () => _manage(context),
+      ),
       children: [
-        Row(
-          children: [
-            const Expanded(child: SectionLabel('Habits')),
-            AppButton(
-              label: 'Manage',
-              small: true,
-              variant: ButtonVariant.ghost,
-              onPressed: () => _manage(context),
-            ),
-          ],
-        ),
         if (habits.isEmpty)
           EmptyState(
             message: 'No habits yet.',

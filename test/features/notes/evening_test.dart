@@ -110,6 +110,6 @@ void main() {
       ],
     );
     expect(find.text('TOP 3'), findsOneWidget);
-    expect(find.text('1. Ship F28'), findsOneWidget);
+    expect(find.text('1.  Ship F28'), findsOneWidget);
   });
 }

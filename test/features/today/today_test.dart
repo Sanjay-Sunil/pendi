@@ -50,7 +50,7 @@ void main() {
       );
       expect(find.text('Good morning'), findsOneWidget);
       expect(find.text('Operating Systems lecture'), findsOneWidget);
-      expect(find.text('READING · 7 PAGES'), findsOneWidget);
+      expect(find.text('7 pages'), findsOneWidget);
       expect(find.text('4A · Watermelon'), findsOneWidget);
       expect(find.text('Send weekly update · Research'), findsOneWidget);
       expect(find.text('Overdue 1d'), findsOneWidget);

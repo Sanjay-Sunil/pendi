@@ -156,6 +156,37 @@ ThemeData buildTheme(Brightness brightness) {
       unselectedLabelTextStyle: TextStyle(color: c.muted, fontSize: 11),
     ),
     dialogTheme: DialogThemeData(backgroundColor: c.surface, elevation: 0),
+    // Selected chips/segments use a soft amber tint, not a solid fill.
+    chipTheme: ChipThemeData(
+      backgroundColor: c.surface,
+      selectedColor: c.accentSoft,
+      showCheckmark: false,
+      side: WidgetStateBorderSide.resolveWith(
+        (s) => BorderSide(
+          color: s.contains(WidgetState.selected) ? c.accent : c.border,
+        ),
+      ),
+      labelStyle: TextStyle(fontFamily: _sans, fontSize: 13, color: c.text),
+      secondaryLabelStyle: TextStyle(
+        fontFamily: _sans,
+        fontSize: 13,
+        color: c.accent,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+    ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.selected) ? c.accentSoft : c.surface,
+        ),
+        foregroundColor: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.selected) ? c.accent : c.text,
+        ),
+        side: WidgetStatePropertyAll(BorderSide(color: c.border)),
+        minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
+      ),
+    ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: c.accent,
       linearTrackColor: c.surface2,
