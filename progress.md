@@ -4,7 +4,7 @@ Agent: update this file at the end of every commit. Status key: `[ ]` todo, `[x]
 Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 ## Current state
-- Next commit: **F38**
+- Next commit: **DONE**
 - Gate status: green
 - Mode: demo (no env keys set)
 - History: commits C01–C12 built a Next.js version (foundation + reading planner). On 2026-11-21 the user switched the app to **Flutter** and renamed it **Pendi**. That work is preserved on branch `nextjs-web`; `main` restarts at F01.
@@ -63,7 +63,7 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 - [x] F35 feat(portals): secure college credentials and attendance client
 - [x] F36 feat(college): sync attendance into courses (80% rule)
 - [x] F37 feat(portals): moodle deadlines into college tasks
-- [ ] F38 feat(college): timetable from attendance sessions
+- [x] F38 feat(college): timetable from attendance sessions
 
 ## Decisions
 <!-- Agent: log every judgment call here. Format: Fxx · decision · why -->
@@ -151,6 +151,7 @@ Test data left in your account: college task "Pendi calendar test", hackathon "H
 - 2026-11-21 · F35 · fc19d89 · own Dart client for attendance.iiitkottayam.ac.in (login + attendance, tolerant parsing, typed errors); login in Android Keystore; Settings → College account; device check pending your login
 - 2026-11-21 · F36 · ccbe6ec · portal courses upserted by code (manual ones kept, no dupes), default min 80%, 'Synced HH:mm', sync on open/refresh/connect; device check pending your login
 - 2026-11-21 · F37 · 7450b3a · own Moodle client (logintoken + session cookie + sesskey, calendar action events); deadlines upserted by moodle:<id> (migration 0002, pushed) and mirrored to Calendar; Settings → Moodle card; host from email (lmsug25)
+- 2026-11-21 · F38 · 7eafb8e · per-course sessions → inferred weekly slots (2+ repeats in 5 weeks, labs flagged), cached on device; College week view + Now/Next on Today
 
 ## Handover (written in F33)
 
