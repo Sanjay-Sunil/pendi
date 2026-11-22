@@ -39,12 +39,12 @@ void main() {
     expect(find.text('No classes yet.'), findsOneWidget);
     await tester.tap(find.text('Missed'));
     await tester.pumpAndSettle();
-    expect(find.text('Attend the next 3 classes to recover.'), findsOneWidget);
-    for (var i = 0; i < 3; i++) {
+    expect(find.text('Attend the next 4 classes to recover.'), findsOneWidget);
+    for (var i = 0; i < 4; i++) {
       await tester.tap(find.text('Attended'));
       await tester.pumpAndSettle();
     }
-    expect(find.text('3/4 · 75%'), findsOneWidget);
+    expect(find.text('4/5 · 80%'), findsOneWidget);
     expect(find.text('At the limit. Attend the next class.'), findsOneWidget);
   });
 }

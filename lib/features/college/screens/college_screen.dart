@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../ui/page_scaffold.dart';
+import '../../college_portal/providers.dart';
 import '../providers.dart';
 import '../widgets/courses_section.dart';
 import '../widgets/tasks_section.dart';
@@ -15,6 +16,7 @@ class CollegeScreen extends ConsumerWidget {
       title: 'College',
       label: 'Classes · Tasks',
       onRefresh: () async {
+        ref.invalidate(portalSyncProvider);
         ref.invalidate(coursesProvider);
         ref.invalidate(collegeTasksProvider);
       },

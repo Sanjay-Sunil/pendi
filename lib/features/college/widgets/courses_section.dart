@@ -4,6 +4,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../data/models/college.dart';
 import '../../../domain/attendance.dart';
+import '../../../domain/dates.dart';
 import '../../../theme/app_theme.dart';
 import '../../../theme/tokens.dart';
 import '../../../ui/app_button.dart';
@@ -13,6 +14,7 @@ import '../../../ui/app_progress_bar.dart';
 import '../../../ui/app_sheet.dart';
 import '../../../ui/empty_state.dart';
 import '../../../ui/section_label.dart';
+import '../../college_portal/providers.dart';
 import '../providers.dart';
 
 class CoursesSection extends ConsumerWidget {
@@ -33,6 +35,15 @@ class CoursesSection extends ConsumerWidget {
         Row(
           children: [
             const Expanded(child: SectionLabel('Attendance')),
+            if (ref.watch(portalSyncProvider).value case final at?)
+              Text(
+                'Synced ${formatTime(at)}',
+                style: TextStyle(
+                  fontFamily: mono,
+                  fontSize: 11,
+                  color: context.colors.muted,
+                ),
+              ),
             AppButton(
               label: 'Course',
               icon: LucideIcons.plus,
@@ -153,7 +164,7 @@ class _AddCourseForm extends ConsumerStatefulWidget {
 class _AddCourseFormState extends ConsumerState<_AddCourseForm> {
   final _name = TextEditingController();
   final _code = TextEditingController();
-  final _min = TextEditingController(text: '75');
+  final _min = TextEditingController(text: '80');
   String? _error;
 
   @override

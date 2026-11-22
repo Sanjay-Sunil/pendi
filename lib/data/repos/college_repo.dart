@@ -11,6 +11,9 @@ class CollegeRepo {
     : _now = now ?? DateTime.now;
 
   final Db _db;
+
+  /// IIIT Kottayam requires 80% attendance.
+  static const defaultMinPct = 80;
   final DateTime Function() _now;
   OnTaskDated? onTaskDated;
 
@@ -22,7 +25,7 @@ class CollegeRepo {
   Future<Result<Course>> addCourse({
     required String name,
     String? code,
-    Object minPct = 75,
+    Object minPct = defaultMinPct,
   }) => Result.guard(
     () async => Course.fromJson(
       (await _db.insert('courses', [
@@ -117,4 +120,44 @@ class CollegeRepo {
   Future<Result<void>> setEvent(String id, String eventId) => Result.guard(
     () => _db.update('college_tasks', id, {'gcal_event_id': eventId}),
   );
+
+  /// Upserts courses from the attendance portal, matched by course code.
+  /// Portal counts win; your minimum % and manual courses are kept.
+  Future<Result<({int added, int updated})>> syncFromPortal(
+    List<({String code, String name, int present, int total})> portal,
+  ) => Result.guard(() async {
+    final existing = {
+      for (final c in await courses()) (c.code ?? '').toUpperCase(): c,
+    };
+    var added = 0, updated = 0;
+    for (final p in portal) {
+      final code = p.code.trim().toUpperCase();
+      if (code.isEmpty || p.present < 0 || p.total < 0 || p.present > p.total) {
+        continue;
+      }
+      final c = existing[code];
+      if (c == null) {
+        await _db.insert('courses', [
+          {
+            'name': p.name.isEmpty ? code : p.name,
+            'code': code,
+            'attendance_attended': p.present,
+            'attendance_total': p.total,
+            'min_pct': defaultMinPct,
+          },
+        ]);
+        added++;
+      } else if (c.attended != p.present ||
+          c.total != p.total ||
+          (p.name.isNotEmpty && c.name != p.name)) {
+        await _db.update('courses', c.id, {
+          'attendance_attended': p.present,
+          'attendance_total': p.total,
+          if (p.name.isNotEmpty) 'name': p.name,
+        });
+        updated++;
+      }
+    }
+    return (added: added, updated: updated);
+  });
 }

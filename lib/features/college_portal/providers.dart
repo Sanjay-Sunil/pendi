@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../integrations/iiitk/attendance_client.dart';
 import '../../integrations/iiitk/credentials.dart';
+import '../college/providers.dart';
 
 final credentialStoreProvider = Provider<CredentialStore>(
   (ref) => const SecureCredentialStore(),
@@ -48,7 +49,10 @@ class CollegePortal extends AsyncNotifier<PortalState> {
     state = AsyncData(PortalState(email: state.value?.email, busy: true));
     final login = (email: email.trim(), password: password);
     final ok = await _fetch(login) != null;
-    if (ok) await ref.read(credentialStoreProvider).write(login);
+    if (ok) {
+      await ref.read(credentialStoreProvider).write(login);
+      ref.invalidate(portalSyncProvider);
+    }
     return ok;
   }
 
@@ -75,3 +79,20 @@ class CollegePortal extends AsyncNotifier<PortalState> {
 final collegePortalProvider = AsyncNotifierProvider<CollegePortal, PortalState>(
   CollegePortal.new,
 );
+
+/// Pulls attendance (if a college account is connected) into courses.
+/// Returns when it last synced, or null when not connected / failed.
+final portalSyncProvider = FutureProvider<DateTime?>((ref) async {
+  final portal = ref.read(collegePortalProvider.notifier);
+  final state = await ref.read(collegePortalProvider.future);
+  if (!state.connected) return null;
+  final summary = await portal.refresh();
+  if (summary == null) return null;
+  final repo = await ref.read(collegeRepoProvider.future);
+  await repo.syncFromPortal([
+    for (final c in summary.courses)
+      (code: c.code, name: c.name, present: c.present, total: c.total),
+  ]);
+  ref.invalidate(coursesProvider);
+  return summary.fetchedAt;
+});
