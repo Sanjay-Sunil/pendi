@@ -413,3 +413,15 @@ enabled = true
 # formatted with uppercase keywords, indent 2, max width 180, trailing commas,
 # and column/key alignment. Set to "null" to emit raw, unformatted SQL.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":180,\"commaStyle\":\"trailing\"}"
+
+# Google sign-in. The app gets an ID token from google_sign_in on the device and
+# exchanges it with signInWithIdToken. client_id may list several IDs (web first,
+# then Android) comma-separated. Values come from supabase/.env.local (git-ignored).
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+redirect_uri = ""
+url = ""
+# google_sign_in on Android does not send a nonce with the ID token.
+skip_nonce_check = true

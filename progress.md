@@ -154,5 +154,5 @@ Log line format: `YYYY-MM-DD · Fxx · <short hash> · one-line note`
 
 **3 manual steps:**
 1. ~~Supabase project~~ Done: project `pendi` exists, migration applied, `env.json` filled with URL + publishable key (local only).
-2. Google OAuth client IDs: enable Calendar API, create Web + Android (debug and release SHA-1) clients, enable the Google provider in Supabase.
+2. Google OAuth client IDs: Web and Android (debug SHA-1) clients created 2026-11-22; IDs in `supabase/.env.local` (git-ignored). Remaining: enable the Google provider in the Supabase dashboard with both client IDs + secret + skip nonce check. Add a second Android client for the release SHA-1 before shipping a release APK.
 3. Release APK: create a keystore, wire `key.properties`, `flutter build apk --release --dart-define-from-file=env.json`.
